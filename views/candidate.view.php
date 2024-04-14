@@ -1,8 +1,7 @@
+<?php require('partials/head.php') ?>
 
-<?php require('partials/head.php')?>
 
-
-<?php require('partials/nav.php')?>
+<?php require('partials/nav.php') ?>
 
 
 
@@ -16,8 +15,8 @@
             <span class="shape-plus shape-plus-green">+</span>
             <span class="shape-plus shape-plus-green shape-plus-2">+</span>
             <span class="dot-shape">
-                        <img src="assets/img/shape/dot-shape.png" alt="dot-shape">
-                    </span>
+                <img src="assets/img/shape/dot-shape.png" alt="dot-shape">
+            </span>
         </div>
         <div class="container">
             <div class="row">
@@ -44,211 +43,213 @@
                 <div class="row">
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-1.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>David Jhon Warner</h5>
-                                <span>Web Designer</span>
 
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
+                            <div class="candidate-plus">
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+
+                                <!-- "+" button to trigger pop-up window -->
+                                <button class="add-candidate-btn" onclick="openAddCandidateModal()" style="background-color: #26ae61; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.3s ease;">
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
-                            <div class="candidate__btn">
-                                <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
+
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-2.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>Somalia D Silva</h5>
-                                <span>Software Developer</span>
 
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
+
+                    <style>
+                        .candidate-plus {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .add-candidate-btn:hover {
+                            background-color: #fe9703 !important;
+                            /* Add !important to override inline styles */
+                            color: white !important;
+                        }
+                    </style>
+
+                    <!-- Modal -->
+                    <div id="addCandidateModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeAddCandidateModal()">&times;</span>
+                            <!-- Candidate form -->
+                            <form id="candidateForm" method="POST" action='/BidenBU/candidate.php'>
+                                <input type="text" name="full_name" placeholder="Full Name" required>
+                                <input type="text" name="languages" placeholder="Languages" required>
+                                <input type="number" name="age" placeholder="Age" required>
+                                <input type="text" name="location" placeholder="Location" required>
+                                <input type="text" name="expected_salary_range" placeholder="Expected Salary Range" required>
+                                <input type="text" name="salary_range" placeholder="Salary Range" required>
+                                <input type="number" name="experience_years" placeholder="Experience Years" required>
+                                <button type="submit" name="addCandidate">Add Candidate</button>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-3.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>Michel Marangga Kari</h5>
-                                <span>Apps Developer</span>
 
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
+                    <style>
+                        /* Modal styles */
+                        .modal {
+                            display: none;
+                            /* Hidden by default */
+                            position: fixed;
+                            /* Stay in place */
+                            z-index: 9999;
+                            /* Sit on top - adjust as needed */
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            /* Full width */
+                            height: 100%;
+                            /* Full height */
+                            overflow: auto;
+                            /* Enable scroll if needed */
+                            background-color: rgba(0, 0, 0, 0.5);
+                            /* Black w/ opacity */
+                        }
+
+                        /* Modal content */
+                        .modal-content {
+                            background-color: #fefefe;
+                            margin: 15% auto;
+                            /* 15% from the top and centered */
+                            padding: 20px;
+                            border: 1px solid #888;
+                            width: 80%;
+                            /* Could be more or less, depending on screen size */
+                        }
+
+                        /* Close button */
+                        .close {
+                            color: #aaa;
+                            float: right;
+                            font-size: 28px;
+                            font-weight: bold;
+                        }
+
+                        .close:hover,
+                        .close:focus {
+                            color: black;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+
+                        /* Form styles */
+                        #candidateForm {
+                            display: grid;
+                            grid-gap: 10px;
+                        }
+
+                        #candidateForm input[type="text"],
+                        #candidateForm input[type="number"],
+                        #candidateForm button {
+                            width: 100%;
+                            padding: 10px;
+                            box-sizing: border-box;
+                        }
+
+                        #candidateForm button {
+                            background-color: #4caf50;
+                            color: white;
+                            border: none;
+                            cursor: pointer;
+                        }
+
+                        #candidateForm button:hover {
+                            background-color: #45a049;
+                        }
+                    </style>
+
+                    <script>
+                        // Function to open the add candidate modal
+                        function openAddCandidateModal() {
+                            document.getElementById("addCandidateModal").style.display = "block";
+                        }
+
+                        // Function to close the modal
+                        function closeAddCandidateModal() {
+                            document.getElementById("addCandidateModal").style.display = "none";
+                        }
+
+                        $(document).ready(function() {
+                            $('#candidateForm').submit(function(event) {
+                                event.preventDefault(); 
+
+                                // Serialize form data
+                                var formData = $(this).serialize();
+
+                                // Send AJAX request
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/../controller/candidate.php', // URL to your PHP controller
+                                    data: formData,
+                                    success: function(response) {
+                                        if (response.trim() === "success") {
+                                            console.log("Candidate added successfully");
+                                            closeAddCandidateModal();
+                                        } else {
+                                            console.log("Failed to add candidate: " + response);
+                                            // Show error message to the user or handle it as needed
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // Handle error response
+                                        alert("Error adding candidate: " + error); // Show error message or handle it as needed
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+
+
+
+
+                    <?php foreach ($candidates as $candidate) : ?>
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="candidate__item text-center mb-75">
+                                <div class="candidate__thumb mb-25">
+                                    <img src="assets/img/candidate/<?php echo htmlspecialchars($candidate['full_name']); ?>.png" alt="<?php echo htmlspecialchars($candidate['full_name']); ?>">
+
                                 </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
+                                <div class="candidate__content">
+                                    <h5><?php echo $candidate['full_name'] . ', ' . $candidate['age']; ?></h5>
+                                    <span><?php echo $candidate['languages']; ?></span>
+
+                                    <div class="candidate__info mt-25 mb-30">
+                                        <span><i class="far fa-map-marker-alt"></i> <?php echo $candidate['location']; ?></span>
+                                        <span><i class="far fa-usd-circle"></i> <?php echo $candidate['salary_range']; ?></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
+                                <div class="candidate__btn">
+                                    <div style="text-align: center;">
+                                        <form method="post" action="/BidenBU/candidate.php" style="margin-left: 10px; display: inline-block;">
+                                            <input type="hidden" name="candidate_id" value="<?php echo $candidate['candidate_id']; ?>">
+                                            <!-- Assuming 'id' is the primary key of the job -->
+                                            <button type="submit" name="deleteCandidate" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        <form method="post" action="/BidenBU/candidate.php" style="margin-left: 10px; display: inline-block;">
+                                            <button onclick="openUpdateJobModal(<?php echo $candidate['candidate_id']; ?>)" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                                <i class="fa fa-pencil"></i> <!-- Assuming you're using Font Awesome -->
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-4.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>Luís Costa Correia</h5>
-                                <span>Web Designer</span>
+                    <?php endforeach; ?>
 
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-5.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>José Fernandes Souza</h5>
-                                <span>Software Developer</span>
 
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-6.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>André Cavalcanti Martins</h5>
-                                <span>Apps Developer</span>
-
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="https://devsnews.com/template/biden/biden/candidate-details.htm/" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-7.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>Felipe Rodrigues Cardoso</h5>
-                                <span>Web Designer</span>
-
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="https://devsnews.com/template/biden/biden/candidate-details.htm/" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-8.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>Gabriel Castro Dias</h5>
-                                <span>Software Developer</span>
-
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="candidate__item text-center mb-75">
-                            <div class="candidate__thumb mb-25">
-                                <img src="assets/img/candidate/can-9.png" alt="">
-                            </div>
-                            <div class="candidate__content">
-                                <h5>Fábio Costa Carvalho</h5>
-                                <span>Apps Developer</span>
-
-                                <div class="candidate__info mt-25 mb-30">
-                                    <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                    <span><i class="far fa-usd-circle"></i>250 - 495 / Monthly</span>
-                                </div>
-                                <div class="candidate__skill">
-                                    <a href="candidate-details.html">Graphics</a>
-                                    <a href="candidate-details.html">Wordpress</a>
-                                </div>
-                            </div>
-                            <div class="candidate__btn">
-                                <a href="candidate-details.html" class="b-btn b-btn-green">View Portfolio <i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-12">
@@ -271,7 +272,7 @@
 
     <!-- login register modal start -->
     <!-- Modal -->
-    <div class="modal fade register__modal-area" id="registerModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal fade register__modal-area" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -318,13 +319,13 @@
                                             <div class="register__mail">
                                                 <p>Email Me Career-Related Biden Updates And Job Opportunities</p>
                                                 <span>
-                                                        <input type="checkbox" checked>
-                                                        Yes
-                                                    </span>
+                                                    <input type="checkbox" checked>
+                                                    Yes
+                                                </span>
                                                 <span>
-                                                        <input type="checkbox">
-                                                        No
-                                                    </span>
+                                                    <input type="checkbox">
+                                                    No
+                                                </span>
                                             </div>
                                             <div class="register__btn mb-45">
                                                 <button type="submit" class="b-btn b-btn-green w-100">Create Account <i class="far fa-arrow-right"></i></button>
@@ -378,13 +379,13 @@
                                             <div class="register__mail">
                                                 <p>Email Me Career-Related Biden Updates And Job Opportunities</p>
                                                 <span>
-                                                        <input type="checkbox" checked>
-                                                        Yes
-                                                    </span>
+                                                    <input type="checkbox" checked>
+                                                    Yes
+                                                </span>
                                                 <span>
-                                                        <input type="checkbox">
-                                                        No
-                                                    </span>
+                                                    <input type="checkbox">
+                                                    No
+                                                </span>
                                             </div>
                                             <div class="register__btn mb-45">
                                                 <button type="submit" class="b-btn b-btn-green w-100">Create Account <i class="far fa-arrow-right"></i></button>
@@ -432,4 +433,4 @@
 </main>
 
 
-<?php require('partials/footer.php')?>
+<?php require('partials/footer.php') ?>

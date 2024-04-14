@@ -12,7 +12,7 @@
                 <span class="shape-plus shape-plus-green">+</span>
                 <span class="shape-plus shape-plus-green shape-plus-2">+</span>
                 <span class="dot-shape">
-                        <img src="assets/img/shape/dot-shape.png" alt="dot-shape">
+                        <img src="../../assets/img/shape/dot-shape.png" alt="dot-shape">
                     </span>
             </div>
             <div class="container">

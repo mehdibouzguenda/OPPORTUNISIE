@@ -172,5 +172,5 @@
 <script src="assets/js/main.js"></script>
 </body>
 
-<!-- Mirrored from www.devsnews.com/template/biden/biden/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Mar 2024 16:26:01 GMT -->
+
 </html>
