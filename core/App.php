@@ -2,7 +2,7 @@
 
 namespace core;
 
-
+use core\container;
 class App
 {
     protected static $container;

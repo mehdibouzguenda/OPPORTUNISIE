@@ -27,12 +27,21 @@
                                 </ul>
                             </nav>
                         </div>
-                        <div class="header-btn d-none d-lg-block">
-                            <div class="hedder-button">
-                                <a class="h-btn d-lg-none d-xl-inline-block" href="register.php" ><i class="far fa-user-circle"></i> Sign In</a>
-                                <a class="h-btn h-btn-green" href="login.php" ><i class="far fa-lock-alt"></i> Log In</a>
+                        <?php if($_SESSION['user']?? false): ?>
+                            <div class="header-btn d-none d-lg-block">
+                                <div class="hedder-button">
+                                    <img src="assets/img/team/mehdi.JPG"  alt="Avatar" style="position: relative; width: 60px; height: 60px; overflow: hidden; object-fit: cover; object-position: 0px 20%; border-radius: 50%;">
+                                </div>
                             </div>
-                        </div>
+                        <?php else:?>
+                            <div class="header-btn d-none d-lg-block">
+                                <div class="hedder-button">
+                                    <a class="h-btn d-lg-none d-xl-inline-block" href="register.php" ><i class="far fa-user-circle"></i> Sign In</a>
+                                    <a class="h-btn h-btn-green" href="login.php" ><i class="far fa-lock-alt"></i> Log In</a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="sidebar__menu d-lg-none">
                             <div class="sidebar-toggle-btn" id="sidebar-toggle">
                                 <span class="line"></span>

@@ -32,23 +32,35 @@ if(!empty($errors)){
 
 //check if the account already exist
 
-$db=App::resolve(Database::class);
+$db=App::resolve( Database::class);
 
-$result=$db->query('select * from users where email= :email',[
+//$config= require('config.php');
+//$db=new Database($config['database']);
+
+$user=$db->query('select * from users where email= :email',[
   'email'=>$email
 ])->find();
 
-dd($result);
+if($user){
+    //header('location : /BidenBU/ ');
+    require('login.php');
+    exit();
+}else{
+    $db->query('INSERT INTO `users`(username ,password,email,role,phone)  VALUES(:username,:password,:email,:role,:phone)',[
+        'username'=>$username,
+        'password'=>$password,
+        'email'=>$email,
+        'role'=>'condidate',
+        'phone'=>$phone
 
-if($_SERVER['REQUEST_METHOD']==='POST'){
-    $errors=[];
-    if(empty($errors)){
-        $db->query('INSERT INTO `user`(username ,password,email,role)  VALUES(:username,:password,:email,:role)',[
-            'username'=>'Mehdi',
-            'password'=>'Love',
-            'email'=>'mehdibouzguenda@gmail.com',
-            'role'=>'admin'
-        ]);
-    }
+    ]);
+    // mark that the user has logged in.
+    //$_SESSION['logged_in']=true;
+    $_SESSION['user']=[
+        'email'=>$email
+    ];
 
+    require('views/index.view.php');
+    exit();
 }
+

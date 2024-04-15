@@ -131,6 +131,182 @@
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-12">
+                                        <div class="job-item employer-item mb-30">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-12">
+                                                    <div class="job-wrapper">
+                                                        <div class="job-instructor-profile">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-xl-4 col-lg-4 col-md-4">
+                                                                    <div class="candidate__item text-center mb-75">
+
+                                                                        <div class="candidate-plus">
+                                                                            <br></br>
+                                                                            <br></br>
+                                                                            <br></br>
+                                                                            <br></br>
+                                                                            <br></br>
+                                                                            <br></br>
+
+                                                                            <!-- "+" button to trigger pop-up window -->
+                                                                            <button class="add-employer-btn" onclick="openAddEmployerModal()" style="background-color: #26ae61; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.3s ease;">
+                                                                                <i class="fas fa-plus"></i>
+                                                                            </button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <style>
+                                                                    .candidate-plus {
+                                                                        display: flex;
+                                                                        justify-content: center;
+                                                                        align-items: center;
+                                                                    }
+
+                                                                    .add-candidate-btn:hover {
+                                                                        background-color: #fe9703 !important;
+                                                                        /* Add !important to override inline styles */
+                                                                        color: white !important;
+                                                                    }
+                                                                </style>
+
+                                                                <!-- Modal -->
+                                                                <div id="addEmployerModal" class="modal">
+                                                                    <div class="modal-content">
+                                                                        <span class="close" onclick="closeAddEmployerModal()">&times;</span>
+                                                                        <!-- Candidate form -->
+                                                                        <form id="candidateForm" method="POST" action='/BidenBU/employer/create'>
+                                                                            <input type="text" id="company_name" name="company_name" placeholder="Full Company Name" required>
+                                                                            <input type="text" id="job_type" name="job_type" placeholder="job type" required>
+                                                                            <input type="number" id="founded_year" name="founded_year" placeholder="founded year" required>
+                                                                            <input type="number" id="employees" name="employees" placeholder="employees number" required>
+                                                                            <input type="text" id="website" name="website" placeholder="website" required>
+                                                                            <button type="submit" name="addEmployer">Add Employer</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+
+                                                                <style>
+                                                                    /* Modal styles */
+                                                                    .modal {
+                                                                        display: none;
+                                                                        /* Hidden by default */
+                                                                        position: fixed;
+                                                                        /* Stay in place */
+                                                                        z-index: 9999;
+                                                                        /* Sit on top - adjust as needed */
+                                                                        left: 0;
+                                                                        top: 0;
+                                                                        width: 100%;
+                                                                        /* Full width */
+                                                                        height: 100%;
+                                                                        /* Full height */
+                                                                        overflow: auto;
+                                                                        /* Enable scroll if needed */
+                                                                        background-color: rgba(0, 0, 0, 0.5);
+                                                                        /* Black w/ opacity */
+                                                                    }
+
+                                                                    /* Modal content */
+                                                                    .modal-content {
+                                                                        background-color: #fefefe;
+                                                                        margin: 15% auto;
+                                                                        /* 15% from the top and centered */
+                                                                        padding: 20px;
+                                                                        border: 1px solid #888;
+                                                                        width: 80%;
+                                                                        /* Could be more or less, depending on screen size */
+                                                                    }
+
+                                                                    /* Close button */
+                                                                    .close {
+                                                                        color: #aaa;
+                                                                        float: right;
+                                                                        font-size: 28px;
+                                                                        font-weight: bold;
+                                                                    }
+
+                                                                    .close:hover,
+                                                                    .close:focus {
+                                                                        color: black;
+                                                                        text-decoration: none;
+                                                                        cursor: pointer;
+                                                                    }
+
+                                                                    /* Form styles */
+                                                                    #candidateForm {
+                                                                        display: grid;
+                                                                        grid-gap: 10px;
+                                                                    }
+
+                                                                    #candidateForm input[type="text"],
+                                                                    #candidateForm input[type="number"],
+                                                                    #candidateForm button {
+                                                                        width: 100%;
+                                                                        padding: 10px;
+                                                                        box-sizing: border-box;
+                                                                    }
+
+                                                                    #candidateForm button {
+                                                                        background-color: #4caf50;
+                                                                        color: white;
+                                                                        border: none;
+                                                                        cursor: pointer;
+                                                                    }
+
+                                                                    #candidateForm button:hover {
+                                                                        background-color: #45a049;
+                                                                    }
+                                                                </style>
+
+                                                                <script>
+                                                                    // Function to open the add candidate modal
+                                                                    function openAddEmployerModal() {
+                                                                        document.getElementById("addEmployerModal").style.display = "block";
+                                                                    }
+
+                                                                    // Function to close the modal
+                                                                    function closeAddEmployerModal() {
+                                                                        document.getElementById("addEmployerModal").style.display = "none";
+                                                                    }
+
+                                                                    $(document).ready(function() {
+                                                                        $('#EmployerForm').submit(function(event) {
+                                                                            event.preventDefault();
+
+                                                                            // Serialize form data
+                                                                            var formData = $(this).serialize();
+
+                                                                            // Send AJAX request
+                                                                            $.ajax({
+                                                                                type: 'POST',
+                                                                                url: '/../controller/employer/employer.php', // URL to your PHP controller
+                                                                                data: formData,
+                                                                                success: function(response) {
+                                                                                    if (response.trim() === "success") {
+                                                                                        console.log("employer added successfully");
+                                                                                        closeAddEmployerModal();
+                                                                                    } else {
+                                                                                        console.log("Failed to add employer: " + response);
+                                                                                        // Show error message to the user or handle it as needed
+                                                                                    }
+                                                                                },
+                                                                                error: function(xhr, status, error) {
+                                                                                    // Handle error response
+                                                                                    alert("Error adding employer: " + error); // Show error message or handle it as needed
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                    });
+                                                                </script>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                    <?php foreach ($employers as $employer) : ?>
                     <div class="job-item employer-item mb-30">
                         <div class="row align-items-center">
                             <div class="col-lg-12">
@@ -143,10 +319,9 @@
                                             <img src="assets/img/job/j-06.png" alt="">
                                         </div>
                                         <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">MaxPro Software LTD</a></h5>
+                                            <h5><a href="employer-details.html"><?php echo $employer['company_name']; ?></a></h5>
                                             <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
+                                                <span><i class="far fa-map-marker-alt"></i> <?php echo $employer['website']; ?></span>
                                             </div>
                                             <div class="emp-rating mt-10">
                                                 <i class="fas fa-star"></i>
@@ -155,265 +330,310 @@
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
                                             </div>
+                                            <form method="POST" action="/BidenBU/employer/delete" style="margin-left: 10px;">
+                                                <input type="hidden" name="employer_id " id="employer_id" value="<?php echo $employer['employer_id']; ?>">
+                                                <!-- Assuming 'id' is the primary key of the job -->
+                                                <button type="submit" name="deleteemployer" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
                                             <div class="job-btn empl-btn">
+
                                                 <a class="b-btn b-btn-green" href="employer-details.html">Job Details <i class="far fa-arrow-right"></i>
                                                 </a>
+
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="job-item employer-item mb-30">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="job-wrapper">
-                                    <div class="banck-icon">
-                                        <i class="flaticon-dashboard"></i>
-                                    </div>
-                                    <div class="job-instructor-profile">
-                                        <div class="job-instructor-img f-left">
-                                            <img src="assets/img/job/j-01.png" alt="">
-                                        </div>
-                                        <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">Green Agro95 LTD</a></h5>
-                                            <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                            </div>
-                                            <div class="emp-rating mt-10">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="job-btn empl-btn">
-                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item employer-item mb-30">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="job-wrapper">
-                                    <div class="banck-icon">
-                                        <i class="flaticon-dashboard"></i>
-                                    </div>
-                                    <div class="job-instructor-profile">
-                                        <div class="job-instructor-img f-left">
-                                            <img src="assets/img/job/j-02.png" alt="">
-                                        </div>
-                                        <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">Design Martunt LTD</a></h5>
-                                            <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                            </div>
-                                            <div class="emp-rating mt-10">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="job-btn empl-btn">
-                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item employer-item mb-30">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="job-wrapper">
-                                    <div class="banck-icon">
-                                        <i class="flaticon-dashboard"></i>
-                                    </div>
-                                    <div class="job-instructor-profile">
-                                        <div class="job-instructor-img f-left">
-                                            <img src="assets/img/job/j-03.png" alt="">
-                                        </div>
-                                        <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">Animation KIng LTD</a></h5>
-                                            <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                            </div>
-                                            <div class="emp-rating mt-10">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="job-btn empl-btn">
-                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item employer-item mb-30">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="job-wrapper">
-                                    <div class="banck-icon">
-                                        <i class="flaticon-dashboard"></i>
-                                    </div>
-                                    <div class="job-instructor-profile">
-                                        <div class="job-instructor-img f-left">
-                                            <img src="assets/img/job/j-04.png" alt="">
-                                        </div>
-                                        <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">Golder Real State LTD</a></h5>
-                                            <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                            </div>
-                                            <div class="emp-rating mt-10">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="job-btn empl-btn">
-                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item employer-item mb-30">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="job-wrapper">
-                                    <div class="banck-icon">
-                                        <i class="flaticon-dashboard"></i>
-                                    </div>
-                                    <div class="job-instructor-profile">
-                                        <div class="job-instructor-img f-left">
-                                            <img src="assets/img/job/j-05.png" alt="">
-                                        </div>
-                                        <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">Golder Real State LTD</a></h5>
-                                            <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                            </div>
-                                            <div class="emp-rating mt-10">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="job-btn empl-btn">
-                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item employer-item mb-30">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="job-wrapper">
-                                    <div class="banck-icon">
-                                        <i class="flaticon-dashboard"></i>
-                                    </div>
-                                    <div class="job-instructor-profile">
-                                        <div class="job-instructor-img f-left">
-                                            <img src="assets/img/job/j-07.png" alt="">
-                                        </div>
-                                        <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">Play Fun LTD</a></h5>
-                                            <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                            </div>
-                                            <div class="emp-rating mt-10">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="job-btn empl-btn">
-                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item employer-item mb-30">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="job-wrapper">
-                                    <div class="banck-icon">
-                                        <i class="flaticon-dashboard"></i>
-                                    </div>
-                                    <div class="job-instructor-profile">
-                                        <div class="job-instructor-img f-left">
-                                            <img src="assets/img/job/j-09.png" alt="">
-                                        </div>
-                                        <div class="job-instructor-title">
-                                            <h5><a href="employer-details.html">MaxPro Software LTD</a></h5>
-                                            <div class="job-meta mt-15">
-                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>
-                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>
-                                            </div>
-                                            <div class="emp-rating mt-10">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="job-btn empl-btn">
-                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="basic-pagination mt-30">
-                        <ul>
-                            <li><a href="#"><i class="fal fa-angle-left"></i></a></li>
-                            <li><a href="#">01</a></li>
-                            <li class="active"><a href="#">02</a></li>
-                            <li><a href="#">03</a></li>
-                            <li><a href="#"><i class="fas fa-ellipsis-h"></i></a></li>
-                            <li><a href="#"><i class="fal fa-angle-right"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-06.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">MaxPro Software LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">Job Details <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-01.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">Green Agro95 LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-02.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">Design Martunt LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-03.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">Animation KIng LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-04.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">Golder Real State LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-05.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">Golder Real State LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-07.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">Play Fun LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="job-item employer-item mb-30">-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-lg-12">-->
+<!--                                <div class="job-wrapper">-->
+<!--                                    <div class="banck-icon">-->
+<!--                                        <i class="flaticon-dashboard"></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="job-instructor-profile">-->
+<!--                                        <div class="job-instructor-img f-left">-->
+<!--                                            <img src="assets/img/job/j-09.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="job-instructor-title">-->
+<!--                                            <h5><a href="employer-details.html">MaxPro Software LTD</a></h5>-->
+<!--                                            <div class="job-meta mt-15">-->
+<!--                                                <span><i class="far fa-briefcase"></i> IT Company LTD</span>-->
+<!--                                                <span><i class="far fa-map-marker-alt"></i> 205 Main Road, New York</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="emp-rating mt-10">-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                                <i class="fas fa-star"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="job-btn empl-btn">-->
+<!--                                                <a class="b-btn b-btn-green" href="employer-details.html">2 New Jobs <i class="far fa-arrow-right"></i>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="basic-pagination mt-30">-->
+<!--                        <ul>-->
+<!--                            <li><a href="#"><i class="fal fa-angle-left"></i></a></li>-->
+<!--                            <li><a href="#">01</a></li>-->
+<!--                            <li class="active"><a href="#">02</a></li>-->
+<!--                            <li><a href="#">03</a></li>-->
+<!--                            <li><a href="#"><i class="fas fa-ellipsis-h"></i></a></li>-->
+<!--                            <li><a href="#"><i class="fal fa-angle-right"></i></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
