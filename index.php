@@ -1,5 +1,7 @@
 
 <?php
+
+session_start();
 require 'core/functions.php';
 //require 'core/container.php';
 //require 'core/App.php';

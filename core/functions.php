@@ -23,3 +23,9 @@ function view($path,$attributes=[]){
     extract($attributes);
     return require 'view/'.$path;
 }
+
+function login($user){
+    $_SESSION['user']=[
+        'email'=>$user['email']
+    ];
+}

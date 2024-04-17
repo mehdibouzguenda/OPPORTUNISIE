@@ -49,16 +49,19 @@
                         <div class="signin-popup-box">
                             <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Candidate</a>
+                                    <a class="nav-link active" id="Candidate-tab" data-toggle="tab" href="#Candidate" role="tab" aria-controls="Candidate" aria-selected="true">Candidate</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Employer</a>
+                                    <a class="nav-link" id="Employer-tab" data-toggle="tab" href="#Employer" role="tab" aria-controls="Employer" aria-selected="false">Employer</a>
                                 </li>
                             </ul>
                             <div class="tab-content d-flex justify-content-center" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-pane fade show active" id="Candidate" role="tabpanel" aria-labelledby="Candidate-tab">
                                     <div class="login-form">
                                         <form action="/BidenBU/register" method="post">
+                                            <input id="Role" name="Role" type="hidden" value="Candidate" >
+
+
                                             <div class="input-text">
                                                 <input id="username" name="username" type="text" placeholder="Username">
                                                 <i class="la la-user"></i>
@@ -91,9 +94,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="tab-pane fade" id="Employer" role="tabpanel" aria-labelledby="Employer-tab">
                                     <div class="login-form">
                                         <form action="/BidenBU/register" method="post">
+                                            <input id="Role" name="Role" type="hidden" value="Employer" >
                                             <div class="input-text">
                                                 <input id="username" name="username" type="text" placeholder="Username">
                                                 <i class="la la-user"></i>

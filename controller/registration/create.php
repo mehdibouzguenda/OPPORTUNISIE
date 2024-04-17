@@ -2,27 +2,27 @@
 use core\Database;
 use core\App;
 use core\Validator;
-
+//dd($_POST);
 $username=$_POST["username"];
 $email=$_POST["email"];
 $password=$_POST["password"];
 $phone=$_POST["phone"];
+$role=$_POST['Role'];
 
 // validation the form inputs.
 $errors=[];
-if(!Validator::email($email)){
-    $errors['email']='Please povide a valid email address ';
-}
 
 if(!Validator::string($username,5,255)){
     $errors['username']='Please povide a valid username ';
 }
-if(!Validator::string($password,8,255)){
-    $errors['password']='Please povide a valid password ';
+else if(!Validator::string($password,8,255)){
+    $errors['username']='Please povide a valid password ';
 }
-
-if(!Validator::string($phone,8,8)){
-    $errors['phone']='Please povide a valid phone ';
+else if(!Validator::email($email)){
+    $errors['username']='Please povide a valid email address ';
+}
+else if(!Validator::string($phone,8,8)){
+    $errors['username']='Please povide a valid phone ';
 }
 
 if(!empty($errors)){
@@ -48,17 +48,19 @@ if($user){
 }else{
     $db->query('INSERT INTO `users`(username ,password,email,role,phone)  VALUES(:username,:password,:email,:role,:phone)',[
         'username'=>$username,
-        'password'=>$password,
+        'password'=>password_hash($password, PASSWORD_BCRYPT),
         'email'=>$email,
-        'role'=>'condidate',
+        'role'=>$role,
         'phone'=>$phone
 
     ]);
     // mark that the user has logged in.
-    //$_SESSION['logged_in']=true;
-    $_SESSION['user']=[
-        'email'=>$email
-    ];
+
+    login($user);
+//    //$_SESSION['logged_in']=true;
+//    $_SESSION['user']=[
+//        'email'=>$email
+//    ];
 
     require('views/index.view.php');
     exit();

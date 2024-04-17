@@ -16,13 +16,13 @@ $errors=[];
 if(!Validator::string($username,5,255)){
     $errors['username']='Please povide a valid username ';
 }
-if(!Validator::string($password,8,255)){
-    $errors['password']='Please povide a valid password ';
+else if(!Validator::string($password,8,255)){
+    $errors['username']='Please povide a valid password ';
 }
 
 
 if(!empty($errors)){
-    return require('views/registration/register.view.php') ;
+    return require ('views/Sessions/login.view.php');
 
 }
 
@@ -34,12 +34,16 @@ $db=App::resolve( Database::class);
 //$config= require('config.php');
 //$db=new Database($config['database']);
 
-$user=$db->query('select * from users where username= :username and password= :password',[
+$user=$db->query('select * from users where username= :username',[
     'username'=>$username,
-    'password'=>$password
 ])->find();
 
-if($user){
+if(!$user){
+    $errors['username']="No matching account found for this user name";
+    //dd($errors);
+    return require ('views/Sessions/login.view.php');
+}
+else if (password_verify($password,$user['password'])){
     //header('location : /BidenBU/ ');
     $_SESSION['user']=[
         'username'=>$username
@@ -49,7 +53,8 @@ if($user){
     exit();
 }else{
 
-    require('views/registration/register.view.php');
+    $errors['username']="wrong password";
+    require ('views/Sessions/login.view.php');
     exit();
 
 }
