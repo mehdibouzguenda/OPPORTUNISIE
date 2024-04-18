@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="manifest" href="https://devsnews.com/template/biden/biden/site.webmanifest/">
+<!--    <link rel="manifest" href="https://devsnews.com/template/biden/biden/site.webmanifest/">-->
     <link rel="shortcut icon" type="image/x-icon" href="">
     <!-- Place favicon.png in the root directory -->
 

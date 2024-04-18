@@ -20,7 +20,7 @@ class Config
                 );
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                echo "<script>alert('Connected successfully');</script>";
+                // echo('Connected successfully');
             } catch (Exception $e) {
                 die('Erreur : ' . $e->getMessage());
             }

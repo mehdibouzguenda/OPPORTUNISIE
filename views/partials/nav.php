@@ -22,17 +22,28 @@
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="job.php">Jobs <i class="far "></i></a> </li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/candidate.php') {echo'active' ; } ?>"><a href="candidate.php">Candidates <i class="far"></i></a></li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/employer.php') {echo'active' ; } ?>"><a href="employer.php">Employers <i class="far"></i></a></li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/about.php') {echo'active' ; } ?>"><a href="about.php">About <i class="far"></i></a> </li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="contact.php">Upload Resume <i class="far fa-cloud-upload"></i></a></li>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/about.php') {echo'active' ; } ?>"><a href="blog.php">Blog <i class="far"></i></a> </li>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="about.php">About us</a></li>
                                 </ul>
                             </nav>
                         </div>
-                        <div class="header-btn d-none d-lg-block">
-                            <div class="hedder-button">
-                                <a class="h-btn d-lg-none d-xl-inline-block" href="register.php" ><i class="far fa-user-circle"></i> Sign In</a>
-                                <a class="h-btn h-btn-green" href="login.php" ><i class="far fa-lock-alt"></i> Log In</a>
+                        <?php if($_SESSION['user']?? false): ?>
+                            <div class="header-btn d-none d-lg-block">
+                                <form action="/BidenBU/logout" method="post">
+                                <div class="hedder-button">
+                                    <img src="assets/img/team/mehdi.JPG"  alt="Avatar" style="position: relative; width: 50px; height: 50px; overflow: hidden; object-fit: cover; object-position: 0px 20%; border-radius: 50%;">
+                                    <button class="h-btn d-lg-none d-xl-inline-block"  ><i class="far fa-user-circle"></i> LOG OUT</button>
+                                </div></form>
                             </div>
-                        </div>
+                        <?php else:?>
+                            <div class="header-btn d-none d-lg-block">
+                                <div class="hedder-button">
+                                    <a class="h-btn d-lg-none d-xl-inline-block" href="register.php" ><i class="far fa-user-circle"></i> Sign up</a>
+                                    <a class="h-btn h-btn-green  " href="login.php" ><i class="far fa-lock-alt"></i> Log In</a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="sidebar__menu d-lg-none">
                             <div class="sidebar-toggle-btn" id="sidebar-toggle">
                                 <span class="line"></span>

@@ -1,5 +1,5 @@
-<?php require('partials/head.php') ?>
-<?php require('partials/nav.php') ?>
+<?php require('views/partials/head.php') ?>
+<?php require('views/partials/nav.php') ?>
 
 
     <main>
@@ -12,7 +12,7 @@
                 <span class="shape-plus shape-plus-green">+</span>
                 <span class="shape-plus shape-plus-green shape-plus-2">+</span>
                 <span class="dot-shape">
-                        <img src="assets/img/shape/dot-shape.png" alt="dot-shape">
+                        <img src="../../assets/img/shape/dot-shape.png" alt="dot-shape">
                     </span>
             </div>
             <div class="container">
@@ -49,33 +49,40 @@
                         <div class="signin-popup-box">
                             <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Candidate</a>
+                                    <a class="nav-link active" id="Candidate-tab" data-toggle="tab" href="#Candidate" role="tab" aria-controls="Candidate" aria-selected="true">Candidate</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Employer</a>
+                                    <a class="nav-link" id="Employer-tab" data-toggle="tab" href="#Employer" role="tab" aria-controls="Employer" aria-selected="false">Employer</a>
                                 </li>
                             </ul>
                             <div class="tab-content d-flex justify-content-center" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-pane fade show active" id="Candidate" role="tabpanel" aria-labelledby="Candidate-tab">
                                     <div class="login-form">
-                                        <form>
+                                        <form action="/BidenBU/register" method="post">
+                                            <input id="Role" name="Role" type="hidden" value="Candidate" >
+
+
                                             <div class="input-text">
-                                                <input type="text" placeholder="Username">
+                                                <input id="username" name="username" type="text" placeholder="Username">
                                                 <i class="la la-user"></i>
                                             </div>
                                             <div class="input-text input-pass">
-                                                <input type="password" placeholder="********">
+                                                <input id="password" name="password" type="password" placeholder="********">
                                             </div>
                                             <div class="input-text input-email">
-                                                <input type="email" placeholder="Email">
+                                                <input id="email" name="email" type="email" placeholder="Email">
                                             </div>
                                             <div class="input-text input-phone">
-                                                <input type="text" placeholder="Phone">
+                                                <input  id="phone" name="phone" type="text" placeholder="Phone">
                                             </div>
                                             <p class="remember-label">
                                                 <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember Me</label>
                                             </p>
                                             <a href="#" title="">Forgot Password?</a>
+                                            <br>
+                                            <?php if(isset($errors['username'])) :?>
+                                                <p style="color:red;"><?= $errors['username'] ?></p>
+                                            <?php endif; ?>
                                             <button type="submit">Login</button>
                                         </form>
                                         <div class="extra-login">
@@ -87,26 +94,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="tab-pane fade" id="Employer" role="tabpanel" aria-labelledby="Employer-tab">
                                     <div class="login-form">
-                                        <form>
+                                        <form action="/BidenBU/register" method="post">
+                                            <input id="Role" name="Role" type="hidden" value="Employer" >
                                             <div class="input-text">
-                                                <input type="text" placeholder="Username">
+                                                <input id="username" name="username" type="text" placeholder="Username">
                                                 <i class="la la-user"></i>
                                             </div>
                                             <div class="input-text input-pass">
-                                                <input type="password" placeholder="********">
+                                                <input id="password" name="password" type="password" placeholder="********">
                                             </div>
                                             <div class="input-text input-email">
-                                                <input type="email" placeholder="Email">
+                                                <input id="email" name="email" type="email" placeholder="Email">
                                             </div>
                                             <div class="input-text input-phone">
-                                                <input type="text" placeholder="Phone">
+                                                <input id="phone" name="phone" type="text" placeholder="Phone">
                                             </div>
                                             <p class="remember-label">
                                                 <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember Me</label>
                                             </p>
                                             <a href="#" title="">Forgot Password?</a>
+                                            <br>
+                                            <?php if(isset($errors['username'])) :?>
+                                                <p style="color:red;"><?= $errors['username'] ?></p>
+                                            <?php endif; ?>
                                             <button type="submit">Login</button>
                                         </form>
                                         <div class="extra-login">
@@ -126,4 +138,4 @@
         </section>
         <!-- register area end -->
     </main>
-<?php require('partials/footer.php') ?>
+<?php require('views/partials/footer.php') ?>

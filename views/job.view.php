@@ -256,7 +256,125 @@
                     });
                 </script>
 
+                <!-- Modal for Updating a Job -->
+                <div id="updateJobModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeUpdateJobModal()">&times;</span>
+                        <!-- Update Job form -->
+                        <form id="JobForm" method="POST" action="/BidenBU/job.php">
+                            <!-- Input fields for updating job information -->
+                            <input type="text" name="updateJobType" placeholder="Job Type" required>
+                            <input type="text" name="updateCategory" placeholder="Category" required>
+                            <input type="text" name="updateLocation" placeholder="Location" required>
+                            <input type="number" name="updateOfferedSalaryMin" placeholder="Offered Salary Min" required>
+                            <input type="number" name="updateOfferedSalaryMax" placeholder="Offered Salary Max" required>
+                            <input type="datetime-local" name="updatePostDate" required>
+                            <input type="number" name="updateExpRequired" placeholder="Experience Required" required>
+                            <input type="text" name="updateGender" placeholder="Gender" required>
+                            <input type="text" name="updateIndustry" placeholder="Industry" required>
+                            <input type="text" name="updateLabel" placeholder="Label" required>
+                            <input type="number" name="updateApplicationsReceived" placeholder="Applications Received" required>
+                            <input type="datetime-local" name="updateAppEndDate" required>
+                            <input type="number" name="updateEmployerId" placeholder="Employer ID" required>
+                            <textarea name="updateDescription" placeholder="Description" required></textarea>
+                            <input type="text" name="updateStatus" placeholder="Status" required>
+                            <!-- Add hidden input field to store job ID -->
+                            <input type="hidden" id="updateJobId" name="job_id">
+                            <button type="submit" name="updateJob">Update Job</button>
+                        </form>
+                    </div>
+                </div>
 
+
+                <script>
+                    // Function to open the update job modal
+                    function openUpdateJobModal(jobId) {
+                        document.getElementById("updateJobModal").style.display = "block";
+
+                        // Retrieve job information based on jobId
+                        $.ajax({
+                            type: 'POST',
+                            url: '/BidenBU/job.php',
+                            data: {
+                                update: 'true',
+                                jobId: jobId
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                // Open the update job modal
+                                $('#updateJobModal').css('display', 'block');
+
+                                // Populate form fields with job information
+                                $('#updateJobId').val(response.job_id);
+                                $('input[name="updateJobType"]').val(response.jobType);
+                                $('input[name="updateCategory"]').val(response.category);
+                                $('input[name="updateLocation"]').val(response.location);
+                                $('input[name="updateOfferedSalaryMin"]').val(response.offeredSalaryMin);
+                                $('input[name="updateOfferedSalaryMax"]').val(response.offeredSalaryMax);
+                                $('input[name="updatePostDate"]').val(response.postDate);
+                                $('input[name="updateExpRequired"]').val(response.expRequired);
+                                $('input[name="updateGender"]').val(response.gender);
+                                $('input[name="updateIndustry"]').val(response.industry);
+                                $('input[name="updateLabel"]').val(response.label);
+                                $('input[name="updateApplicationsReceived"]').val(response.applicationsReceived);
+                                $('input[name="updateEmployerId"]').val(response.employerId);
+                                $('textarea[name="updateDescription"]').val(response.description);
+                                $('input[name="updateStatus"]').val(response.status);
+                                // Convert appEndDate to the appropriate format and set the value
+                                var appEndDate = new Date(response.appEndDate);
+                                var formattedAppEndDate = appEndDate.toISOString().slice(0, 16); // Adjust format if necessary
+                                $('input[name="updateAppEndDate"]').val(formattedAppEndDate);
+                            },
+                            error: function(xhr, status, error) {
+                                var response = JSON.parse(xhr.responseText);
+                                console.log(response);
+                                // Handle error response
+                                // alert("Error retrieving job information: " + error);
+                            }
+                        });
+                    }
+
+
+                    // Function to close the modal
+                    function closeUpdateJobModal() {
+                        $('#updateJobModal').css('display', 'none');
+                    }
+
+                    $(document).ready(function() {
+                        $('#JobForm').submit(function(event) {
+                            event.preventDefault(); // Prevent default form submission
+
+                            // Serialize form data
+                            var formData = $(this).serialize();
+
+                            // Send AJAX request
+                            $.ajax({
+                                type: 'POST',
+                                url: '/BidenBU/job.php',
+                                data: formData,
+                                success: function(response) {
+                                    try {
+                                        response = JSON.parse(response); // Parse JSON response
+                                        if (response.success === "true") {
+                                            console.log("Job updated successfully");
+                                            closeUpdateJobModal();
+                                        } else {
+                                            console.log("Failed to update job: " + response.error);
+                                            // Show error message to the user or handle it as needed
+                                        }
+                                    } catch (error) {
+                                        console.log("Error parsing response: " + error);
+                                        // Handle error parsing response
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error response
+                                    alert("Error updating job: " + error); // Show error message or handle it as needed
+                                }
+                            });
+                        });
+                    });
+                </script>
 
                 <?php foreach ($jobs as $job) : ?>
                     <div class="col-xl-4 col-lg-6 col-md-12">
@@ -272,8 +390,8 @@
                                     'Contract' => 'flaticon-contract-icon'
                                 ];
                                 ?>
-                               <i class="<?php //echo $icons[$job['job_type']]; 
-                                                ?>"></i>
+                                <i class="<?php //echo $icons[$job['job_type']]; 
+                                            ?>"></i>
 
                             </div>
                             <div class="job-tag mb-30">
@@ -299,14 +417,29 @@
                             <div class="job-content">
                                 <h4><a href="job-details.php"><?php echo $job['label']; ?></a></h4>
                                 <p><?php echo $job['description']; ?></p>
-                                <div class="job-salary">
-                                    <span><i class="fal fa-usd-circle"></i> <?php echo $job['offered_salary_min']; ?> - <?php echo $job['offered_salary_max']; ?></span>
-                                    <a href="job-details.php">Job Details <i class="far fa-arrow-right"></i></a>
+                                <div class="job-salary" style="display: flex; align-items: center;">
+                                    <span style="flex: 1;"><i class="fal fa-usd-circle"></i> <?php echo $job['offered_salary_min']; ?> - <?php echo $job['offered_salary_max']; ?></span>
+                                    <form method="post" action="/BidenBU/job.php" style="margin-left: 10px;">
+                                        <input type="hidden" name="job_id" value="<?php echo $job['job_id']; ?>">
+                                        <!-- Assuming 'id' is the primary key of the job -->
+                                        <button type="submit" name="deleteJob" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    <form method="post" action="/BidenBU/job.php" style="margin-left: 10px;">
+                                    <button onclick="openUpdateJobModal(<?php echo $job['job_id']; ?>)" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                        <i class="fa fa-pencil"></i> <!-- Assuming you're using Font Awesome -->
+                                    </button>
+                                    </form>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
+
+
             </div>
         </div>
     </div>

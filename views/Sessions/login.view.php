@@ -1,5 +1,5 @@
-<?php require('partials/head.php') ?>
-<?php require('partials/nav.php') ?>
+<?php require('views/partials/head.php') ?>
+<?php require('views/partials/nav.php') ?>
 
 
     <main>
@@ -12,7 +12,7 @@
                 <span class="shape-plus shape-plus-green">+</span>
                 <span class="shape-plus shape-plus-green shape-plus-2">+</span>
                 <span class="dot-shape">
-                        <img src="assets/img/shape/dot-shape.png" alt="dot-shape">
+                        <img src="../../assets/img/shape/dot-shape.png" alt="dot-shape">
                     </span>
             </div>
             <div class="container">
@@ -48,18 +48,22 @@
                     <div class="col-12">
                         <div class="signin-popup-box d-flex justify-content-center">
                             <div class="login-form">
-                                <form>
+                                <form action="/BidenBU/login" method="post" >
                                     <div class="input-text">
-                                        <input type="text" placeholder="Username">
+                                        <input id="username" name="username"  type="text" placeholder="Username">
                                         <i class="la la-user"></i>
                                     </div>
                                     <div class="input-text input-pass">
-                                        <input type="password" placeholder="********">
+                                        <input id="password" name="password" type="password" placeholder="********">
                                     </div>
                                     <p class="remember-label">
                                         <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember Me</label>
                                     </p>
                                     <a href="#" title="">Forgot Password?</a>
+                                    <br>
+                                    <?php if(isset($errors['username'])) :?>
+                                        <p style="color:red;"><?= $errors['username'] ?></p>
+                                    <?php endif; ?>
                                     <button type="submit">Login</button>
                                 </form>
                                 <div class="extra-login">
@@ -78,4 +82,4 @@
         <!-- login area end -->
     </main>
 
-<?php require('partials/footer.php') ?>
+<?php require('views/partials/footer.php') ?>
