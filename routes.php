@@ -9,18 +9,27 @@
 //    '/BidenBU/login.php' => 'controller/login.php',
 //    '/BidenBU/register.php' => 'controller/register.php',
 //];
-$router->get('/BidenBU/','controller/index.php');
-$router->get('/BidenBU/employer.php','controller/employer/employer.php');
+$router->get('/BidenBU/','index.php');
+$router->get('/BidenBU/index.php','index.php');
 
-$router->get('/BidenBU/index.php','controller/index.php');
-$router->get('/BidenBU/candidate.php','controller/candidate.php');
-$router->get('/BidenBU/job.php','controller/job.php');
-$router->get('/BidenBU/job-details.php','controller/job-details.php');
-$router->get('/BidenBU/login.php','controller/Sessions/login.php');
-$router->get('/BidenBU/register.php','controller/registration/register.php')->only('guest');
-//$router->get('/BidenBU/register.php','controller/registration/register.php');
-$router->post('/BidenBU/register','controller/registration/create.php');
-$router->post('/BidenBU/employer/create','controller/employer/create.php');
-$router->post('/BidenBU/login','controller/Sessions/create.php');
-$router->delete('/BidenBU/employer/delete','controller/employer/delete.php');
-$router->delete('/BidenBU/logout','controller/Sessions/delete.php');
+$router->get('/BidenBU/employer.php','employer/employer.php');
+$router->post('/BidenBU/employer/create','employer/create.php');
+$router->delete('/BidenBU/employer/delete','employer/delete.php');
+
+$router->get('/BidenBU/candidate.php','candidate.php');
+
+$router->get('/BidenBU/job.php','job.php');
+$router->get('/BidenBU/job-details.php','job-details.php');
+
+$router->get('/BidenBU/blog','blog/blog.php');
+$router->get('/BidenBU/blog-details','blog/blog-details/index.php');
+
+$router->get('/BidenBU/login.php','Sessions/login.php');
+$router->get('/BidenBU/register.php','registration/register.php')->only('guest');
+$router->post('/BidenBU/login','Sessions/create.php');
+$router->post('/BidenBU/register','registration/create.php');
+$router->delete('/BidenBU/logout','Sessions/delete.php')->only('auth');
+
+$router->get('/BidenBU/user-details','user/index.php');
+$router->patch('/BidenBU/userUpdate','user/update.php');
+$router->delete('/BidenBU/userDelete','user/delete.php');

@@ -50,7 +50,7 @@ class router
         return $this->add('POST',$uri,$controller);
     }
     public function patch($uri,$controller){
-        return $this->add('PATCH',$uri,$controller);
+        return $this->add('POST',$uri,$controller);
     }
     public function put($uri,$controller){
         return $this->add('PUT',$uri,$controller);
@@ -74,7 +74,7 @@ class router
 //                if ($route['middleware']==='auth'){
 //                    (new Auth)->handle();
 //                }
-                return require $route['controller'];
+                return require ('Http/controller/'.$route['controller']);
             }
         }
         $this->abord();

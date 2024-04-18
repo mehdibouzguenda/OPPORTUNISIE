@@ -26,7 +26,7 @@ else if(!Validator::string($phone,8,8)){
 }
 
 if(!empty($errors)){
-    return require('views/registration/register.view.php') ;
+    return require('views/registration/register.view.php');
 
 }
 
@@ -56,7 +56,7 @@ if($user){
     ]);
     // mark that the user has logged in.
 
-    login($user);
+    login($username);
 //    //$_SESSION['logged_in']=true;
 //    $_SESSION['user']=[
 //        'email'=>$email

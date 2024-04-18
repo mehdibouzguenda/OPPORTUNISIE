@@ -3,10 +3,21 @@
 use core\Database;
 use core\App;
 use core\Validator;
+use Http\Forms\LoginForm;
 
 $username=$_POST["username"];
 
 $password=$_POST["password"];
+
+//$form = new LoginForm();
+//
+//if(!$form->Validate($username,$password)){
+//
+//    return require('views/Sessions/login.view.php');
+//
+//}
+
+
 
 
 // validation the form inputs.
@@ -22,7 +33,7 @@ else if(!Validator::string($password,8,255)){
 
 
 if(!empty($errors)){
-    return require ('views/Sessions/login.view.php');
+    return require('views/Sessions/login.view.php');
 
 }
 
@@ -41,7 +52,7 @@ $user=$db->query('select * from users where username= :username',[
 if(!$user){
     $errors['username']="No matching account found for this user name";
     //dd($errors);
-    return require ('views/Sessions/login.view.php');
+    return require('views/Sessions/login.view.php');
 }
 else if (password_verify($password,$user['password'])){
     //header('location : /BidenBU/ ');
@@ -54,7 +65,7 @@ else if (password_verify($password,$user['password'])){
 }else{
 
     $errors['username']="wrong password";
-    require ('views/Sessions/login.view.php');
+    require('views/Sessions/login.view.php');
     exit();
 
 }

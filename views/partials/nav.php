@@ -22,8 +22,8 @@
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="job.php">Jobs <i class="far "></i></a> </li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/candidate.php') {echo'active' ; } ?>"><a href="candidate.php">Candidates <i class="far"></i></a></li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/employer.php') {echo'active' ; } ?>"><a href="employer.php">Employers <i class="far"></i></a></li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/about.php') {echo'active' ; } ?>"><a href="blog.php">Blog <i class="far"></i></a> </li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="about.php">About us</a></li>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/blog') {echo'active' ; } ?>"><a href="blog">Blog <i class="far"></i></a> </li>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/about') {echo'active' ; } ?>"><a href="about">About us</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -31,7 +31,7 @@
                             <div class="header-btn d-none d-lg-block">
                                 <form action="/BidenBU/logout" method="post">
                                 <div class="hedder-button">
-                                    <img src="assets/img/team/mehdi.JPG"  alt="Avatar" style="position: relative; width: 50px; height: 50px; overflow: hidden; object-fit: cover; object-position: 0px 20%; border-radius: 50%;">
+                                    <a href="user-details"><img src="assets/img/team/mehdi.JPG" href="user-detail" alt="Avatar" style="position: relative; width: 50px; height: 50px; overflow: hidden; object-fit: cover; object-position: 0px 20%; border-radius: 50%;"></a>
                                     <button class="h-btn d-lg-none d-xl-inline-block"  ><i class="far fa-user-circle"></i> LOG OUT</button>
                                 </div></form>
                             </div>

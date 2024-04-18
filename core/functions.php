@@ -1,4 +1,7 @@
 <?php
+
+
+
 function dd($value){
     echo "<pre>";
     var_dump($value);
@@ -21,11 +24,19 @@ function base_path($path)
 
 function view($path,$attributes=[]){
     extract($attributes);
-    return require 'view/'.$path;
+    return require ('view/'.$path);
 }
 
 function login($user){
     $_SESSION['user']=[
-        'email'=>$user['email']
+        'username'=>$user
     ];
+    session_regenerate_id(true);
+}
+
+function logout(){
+    $_SESSION=[];
+    session_destroy();
+    $params=session_get_cookie_params();
+    setcookie('PHPSESSID','',time()-3600,$params['path'],$params['domain'],$params['secure'],$params['httponly']);
 }
