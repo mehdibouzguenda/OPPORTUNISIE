@@ -21,7 +21,7 @@
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/') {echo'active' ; } else {echo'';} ?>"><a href="/BidenBU">home <i class="far"></i></a></li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="job.php">Jobs <i class="far "></i></a> </li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/candidate.php') {echo'active' ; } ?>"><a href="candidate.php">Candidates <i class="far"></i></a></li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/employer.php') {echo'active' ; } ?>"><a href="employer.php">Employers <i class="far"></i></a></li>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/Reclamation.php') {echo'active' ; } ?>"><a href="Reclamation.php">Reclamations <i class="far"></i></a></li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/about.php') {echo'active' ; } ?>"><a href="about.php">About <i class="far"></i></a> </li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="contact.php">Upload Resume <i class="far fa-cloud-upload"></i></a></li>
                                 </ul>
