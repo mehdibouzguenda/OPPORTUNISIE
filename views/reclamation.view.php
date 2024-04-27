@@ -71,16 +71,41 @@ require('partials/nav.php');
         }
     </style>
 
-    <div id="addReclamationModal" class="modal">
+    <div id="addReclamationModal" class="modal" etat="en attente">
         <div class="modal-content">
             <span class="close" onclick="closeAddReclamationModal()">&times;</span>
 
             <form id="addReclamationForm" method="POST" action="/BidenBU/Reclamation.php">
                 <input type="text" name="reclaimerName" placeholder="Reclaimer Name" required>
-                <input type="date" name="reclamationDate" required>
+                <?php 
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                   if(empty($_POST['reclaimerName'])){
+                    echo ' Le nom est requis !!';
+                   }
+                }
+            ?>
+
                 <textarea name="reclamationDescription" placeholder="Reclamation Description" required></textarea>
                 <button type="submit" name="addReclamation">Add Reclamation</button>
             </form>
+            <script>
+    function validateForm(formId) {
+        var form = document.getElementById(formId);
+        var inputs = form.querySelectorAll('input, textarea');
+
+        // Check each input within the form
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].hasAttribute('required') && inputs[i].value.trim() === "") {
+                alert("Please fill in all fields.");
+                return false; // Prevent form submission
+            }
+        }
+
+        // Additional custom validation if needed
+
+        return true; // Allow form submission
+    }
+</script>
         </div>
     </div>
 
@@ -175,7 +200,6 @@ require('partials/nav.php');
         }
 
         #addReclamationForm input[type="text"],
-        #addReclamationForm input[type="date"],
         #addReclamationForm textarea,
         #addReclamationForm button {
             width: 100%;
@@ -201,31 +225,37 @@ require('partials/nav.php');
 
 
 
-    <?php foreach ($reclamations as $reclamation) : ?>
-        <div class="col-xl-4 col-lg-6 col-md-12">
-            <div class="reclamation-wrapper mb-30">
-                <div class="reclamation-tag mb-30">
-                    <!-- Display reclaimer name and reclamation date -->
-                    <span class="tag-normal"><?php echo htmlspecialchars($reclamation['reclaimer_name']); ?></span>
-                    <span class="tag-normal"><?php echo htmlspecialchars($reclamation['reclamation_date']); ?></span>
-                </div>
-                <div class="reclamation-content">
-                    <h4><a href="reclamation-details.php"><?php echo htmlspecialchars($reclamation['reclamation_description']); ?></a></h4>
-                </div>
-                <div class="reclamation-actions" style="display: flex; align-items: center;">
-                    <!-- Delete Reclamation Form -->
-                    <form method="post" action="/BidenBU/Reclamation.php">
-                        <input type="hidden" name="reclamationId" value="<?php echo $reclamation['reclamation_id']; ?>">
-                        <button type="submit" name="deleteReclamation" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </form>
-                    <!-- Update Reclamation Button (Assuming modal or form) -->
-                    <form onsubmit="return false;">
-                        <button onclick="openUpdateReclamationModal(<?php echo $reclamation['reclamation_id']; ?>, '<?php echo htmlspecialchars($reclamation['reclaimer_name']); ?>', '<?php echo htmlspecialchars($reclamation['reclamation_date']); ?>', '<?php echo htmlspecialchars($reclamation['reclamation_description']); ?>')" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
-                            <i class="fa fa-pencil"></i>
-                        </button>
-                    </form>
+<?php foreach ($reclamations as $reclamation) : ?>
+    <div class="col-xl-4 col-lg-6 col-md-12">
+        <div class="reclamation-wrapper mb-30">
+            <div class="reclamation-tag mb-30">
+                <!-- Display reclaimer name and reclamation date -->
+                <span class="tag-normal"><?php echo htmlspecialchars($reclamation['reclaimer_name']); ?></span>
+            </div>
+            <div class="reclamation-content">
+                <h4><a href="reclamation-details.php"><?php echo htmlspecialchars($reclamation['reclamation_description']); ?></a></h4>
+            </div>
+            <span class="tag-normal"><?php echo htmlspecialchars($reclamation['etat'] ?? 'EN ATTENTE'); ?></span>
+            <div class="reclamation-actions" style="display: flex; align-items: center;">
+                <!-- Add the etat field -->
+                <!-- Display system date and time -->
+                <span class="tag-normal"><?php echo date('Y-m-d H:i:s'); ?></span>
+            </div>
+        </div>
+    </div>
+
+
+                <!-- Delete Reclamation Form -->
+                <form method="post" action="/BidenBU/Reclamation.php">
+                    <input type="hidden" name="reclamationId" value="<?php echo $reclamation['reclamation_id']; ?>">
+                    <input type="hidden" name="etat" value="en attente"> <!-- Add the 'etat' attribute here -->
+                    <button type="submit" name="deleteReclamation" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>
+            
+
+                    
                 </div>
             </div>
         </div>

@@ -23,20 +23,19 @@ class ReclamationModel
         }
     }
 
-    public function addReclamation($reclaimerName, $reclamationDate, $reclamationDescription)
+    public function addReclamation($reclaimerName, $reclamationDescription)
     {
         try {
-            $query = "INSERT INTO reclamation (reclaimer_name, reclamation_date, reclamation_description) VALUES (:reclaimerName, :reclamationDate, :reclamationDescription)";
+            $query = "INSERT INTO reclamation (reclaimer_name, reclamation_description, etat) VALUES (:reclaimerName, :reclamationDescription, 'en attente')";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':reclaimerName', $reclaimerName);
-            $stmt->bindParam(':reclamationDate', $reclamationDate);
             $stmt->bindParam(':reclamationDescription', $reclamationDescription);
             return $stmt->execute();
         } catch (PDOException $e) {
             return false;
         }
     }
-
+    
     public function deleteReclamation($reclamationId)
     {
         try {
@@ -48,14 +47,13 @@ class ReclamationModel
             return false;
         }
     }
-
-    public function updateReclamation($reclamationId, $reclaimerName, $reclamationDate, $reclamationDescription)
+    
+    public function updateReclamation($reclamationId, $reclaimerName,  $reclamationDescription)
     {
         try {
-            $query = "UPDATE reclamation SET reclaimer_name = :reclaimerName, reclamation_date = :reclamationDate, reclamation_description = :reclamationDescription WHERE reclamation_id = :reclamationId";
+            $query = "UPDATE reclamation SET reclaimer_name = :reclaimerName,  reclamation_description = :reclamationDescription WHERE reclamation_id = :reclamationId";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':reclaimerName', $reclaimerName);
-            $stmt->bindParam(':reclamationDate', $reclamationDate);
             $stmt->bindParam(':reclamationDescription', $reclamationDescription);
             $stmt->bindParam(':reclamationId', $reclamationId);
             return $stmt->execute();

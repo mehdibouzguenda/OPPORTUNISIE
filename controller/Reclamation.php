@@ -5,10 +5,10 @@ $reclamationModel = new ReclamationModel();
 // Add Reclamation
 if (isset($_POST['addReclamation'])) {
     $reclaimerName = $_POST['reclaimerName'];
-    $reclamationDate = $_POST['reclamationDate'];
     $reclamationDescription = $_POST['reclamationDescription'];
+    $etat = 'en attente';
 
-    $success = $reclamationModel->addReclamation($reclaimerName, $reclamationDate, $reclamationDescription);
+    $success = $reclamationModel->addReclamation($reclaimerName, $reclamationDescription, $etat);
 
     if ($success) {
         header("Location: {$_SERVER['REQUEST_URI']}");
@@ -17,6 +17,7 @@ if (isset($_POST['addReclamation'])) {
         echo 'Error occurred while adding reclamation';
     }
 }
+
 
 // Delete Reclamation
 if (isset($_POST['deleteReclamation'])) {
@@ -35,7 +36,6 @@ if (isset($_POST['deleteReclamation'])) {
 if (isset($_POST['updateReclamation'])) {
     $reclamationId = $_POST['reclamationId'];
     $reclaimerName = $_POST['updateReclaimerName'];
-    $reclamationDate = $_POST['updateReclamationDate'];
     $reclamationDescription = $_POST['updateReclamationDescription'];
 
     $success = $reclamationModel->updateReclamation($reclamationId, $reclaimerName, $reclamationDate, $reclamationDescription);
