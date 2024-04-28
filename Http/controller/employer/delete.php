@@ -12,6 +12,6 @@ $db->query('delete FROM `employer` where employer_id = :id',['id'=>$_POST['emplo
 
 
 //header("Refresh:0");
-//require('views/index.view.php');
+//require('views/index.show.php');
 //exit();
 //dd($employers);

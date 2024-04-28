@@ -83,7 +83,7 @@
                                             <?php if(isset($errors['username'])) :?>
                                                 <p style="color:red;"><?= $errors['username'] ?></p>
                                             <?php endif; ?>
-                                            <button type="submit">Login</button>
+                                            <button type="submit">register</button>
                                         </form>
                                         <div class="extra-login">
                                             <span>Or</span>
@@ -119,7 +119,7 @@
                                             <?php if(isset($errors['username'])) :?>
                                                 <p style="color:red;"><?= $errors['username'] ?></p>
                                             <?php endif; ?>
-                                            <button type="submit">Login</button>
+                                            <button type="submit">Register</button>
                                         </form>
                                         <div class="extra-login">
                                             <span>Or</span>

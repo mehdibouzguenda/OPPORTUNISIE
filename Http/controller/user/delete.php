@@ -29,6 +29,7 @@ $db->query('delete FROM `users` where username = :username and email = :email ',
     [   'username' => $username,
         'email'=>$email
     ]);
-require('views/user/user.view.php');
+logout();
+require('views/index.view.php');
 exit();
 //}

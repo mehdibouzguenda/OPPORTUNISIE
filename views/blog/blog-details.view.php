@@ -150,6 +150,7 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            <?php foreach ($comnts as $comnt) : ?>
                                             <li>
                                                 <div class="comments-box">
                                                     <div class="comments-avatar">
@@ -157,34 +158,27 @@
                                                     </div>
                                                     <div class="comments-text">
                                                         <div class="avatar-name">
-                                                            <h5>David Angel Makel</h5>
+                                                            <h5><?php echo $comnt['commenter_name']; ?></h5>
                                                             <span>IT Consultant</span>
                                                         </div>
-                                                        <p>It is a long established fact that a reader will be distracted by the readable content page looking at its layout point of using normal.</p>
+                                                        <p><?php echo $comnt['comment']; ?></p>
                                                         <a href="#" class="comment-reply">Reply Comments <i class="far fa-long-arrow-right"></i></a>
                                                     </div>
                                                 </div>
                                             </li>
-
+                                                <?php endforeach; ?>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="post-comment-form grey-bg">
                                     <h4>Reply Comments</h4>
-                                    <form action="#">
-                                        <div class="post-input">
-                                            <input type="text" placeholder="Full Name Here">
-                                            <i class="far fa-user"></i>
-                                        </div>
-                                        <div class="post-input">
-                                            <input type="email" placeholder="Email Address">
-                                            <i class="far fa-envelope"></i>
-                                        </div>
+                                    <form method="post" action="/BidenBU/blog/comment/create">
                                         <div class="post-input">
                                             <textarea placeholder="comment"></textarea>
                                             <i class="far fa-pen-alt"></i>
                                         </div>
-                                        <button type="submit" class="b-btn">Send Message <i class="far fa-arrow-right"></i></button>
+                                        <input type="hidden" name="blog_id " id="blog_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                        <button type="submit" class="b-btn">Send comment <i class="far fa-arrow-right"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -349,165 +343,7 @@
         </div>
     </section>
     <!-- blog area emd -->
-    <!-- login register modal start -->
-    <!-- Modal -->
-    <div class="modal fade register__modal-area" id="registerModal" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="register__modal">
-                        <div class="register__nav">
-                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="register-tab" data-toggle="pill" href="#register" role="tab" aria-controls="register" aria-selected="true"><i class="far fa-user-circle"></i>Register Account</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="login-tab" data-toggle="pill" href="#login" role="tab" aria-controls="login" aria-selected="false"><i class="fal fa-lock-open-alt"></i>Login Account</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="register__nav-content">
-                            <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                    <div class="register__form">
-                                        <form action="#">
-                                            <div class="register__input">
-                                                <input type="text" placeholder="Your First Name">
-                                                <i class="far fa-user"></i>
-                                            </div>
-                                            <div class="register__input">
-                                                <input type="text" placeholder="Your Last Name">
-                                                <i class="far fa-user"></i>
-                                            </div>
-                                            <div class="register__input">
-                                                <input type="email" placeholder="Your  Email Address">
-                                                <i class="far fa-envelope-open"></i>
-                                            </div>
-                                            <div class="register__input">
-                                                <input type="text" placeholder="Your  Phone Number">
-                                                <i class="far fa-phone"></i>
-                                            </div>
-                                            <div class="register__input">
-                                                <input type="password" placeholder="Password">
-                                                <i class="far fa-lock-alt"></i>
-                                            </div>
-                                            <div class="register__input">
-                                                <input type="password" placeholder="Confirm Password">
-                                                <i class="far fa-lock-alt"></i>
-                                            </div>
-                                            <div class="register__mail">
-                                                <p>Email Me Career-Related Biden Updates And Job Opportunities</p>
-                                                <span>
-                                                        <input type="checkbox" checked>
-                                                        Yes
-                                                    </span>
-                                                <span>
-                                                        <input type="checkbox">
-                                                        No
-                                                    </span>
-                                            </div>
-                                            <div class="register__btn mb-45">
-                                                <button type="submit" class="b-btn b-btn-green w-100">Create Account <i class="far fa-arrow-right"></i></button>
-                                            </div>
-                                            <div class="register__or text-center">
-                                                <div class="register__or-title mb-20">
-                                                    <h3>OR</h3>
-                                                </div>
-                                                <div class="register__option theme-social">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" class="fb">
-                                                                <i class="fab fa-facebook-f"></i>
-                                                                <i class="fab fa-facebook-f"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="tw">
-                                                                <i class="fab fa-twitter"></i>
-                                                                <i class="fab fa-twitter"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="gp">
-                                                                <i class="fab fa-google-plus-g"></i>
-                                                                <i class="fab fa-google-plus-g"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
 
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab">
-                                    <div class="register__form">
-                                        <form action="#">
-                                            <div class="register__input">
-                                                <input type="email" placeholder="Your  Email Address">
-                                                <i class="far fa-envelope-open"></i>
-                                            </div>
-                                            <div class="register__input">
-                                                <input type="text" placeholder="Your  Phone Number">
-                                                <i class="far fa-phone"></i>
-                                            </div>
-                                            <div class="register__input">
-                                                <input type="password" placeholder="Password">
-                                                <i class="far fa-lock-alt"></i>
-                                            </div>
-                                            <div class="register__mail">
-                                                <p>Email Me Career-Related Biden Updates And Job Opportunities</p>
-                                                <span>
-                                                        <input type="checkbox" checked>
-                                                        Yes
-                                                    </span>
-                                                <span>
-                                                        <input type="checkbox">
-                                                        No
-                                                    </span>
-                                            </div>
-                                            <div class="register__btn mb-45">
-                                                <button type="submit" class="b-btn b-btn-green w-100">Create Account <i class="far fa-arrow-right"></i></button>
-                                            </div>
-                                            <div class="register__or text-center">
-                                                <div class="register__or-title mb-20">
-                                                    <h3>OR</h3>
-                                                </div>
-                                                <div class="register__option theme-social">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" class="fb">
-                                                                <i class="fab fa-facebook-f"></i>
-                                                                <i class="fab fa-facebook-f"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="tw">
-                                                                <i class="fab fa-twitter"></i>
-                                                                <i class="fab fa-twitter"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="gp">
-                                                                <i class="fab fa-google-plus-g"></i>
-                                                                <i class="fab fa-google-plus-g"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- login register modal end -->
 
 </main>
 

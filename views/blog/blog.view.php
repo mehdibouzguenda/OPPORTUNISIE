@@ -12,7 +12,7 @@
             <span class="shape-plus shape-plus-green">+</span>
             <span class="shape-plus shape-plus-green shape-plus-2">+</span>
             <span class="dot-shape">
-                        <img src="assets/img/shape/dot-shape.png" alt="dot-shape">
+                        <img src="../../assets/img/shape/dot-shape.png" alt="dot-shape">
                     </span>
         </div>
         <div class="container">
@@ -39,24 +39,32 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="blog__item-2 mb-30 ">
-                        <div class="blog__thumb fix">
-                            <a href="blog-details"><img src="assets/img/blog/blog-1.jpg" alt=""></a>
-                        </div>
+
                         <div class="blog__content-2">
-                            <div class="blog__date text-center">
-                                <h4>20</h4>
-                                <span>Dec</span>
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="job-wrapper mb-30">
+                                    <div class="job-plus">
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+
+                                        <!-- "+" button to trigger pop-up window -->
+                                        <button class="add-job-btn" onclick="location.href='/BidenBU/blog/add-blog';" style="background-color: #26ae61; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.3s ease;">
+                                            <i class="fas fa-plus"></i>
+
+                                        </button>
+
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="blog__meta blog__meta-2">
-                                <span><i class="fal fa-user-circle"></i><a href="#">David Warner</a></span>
-                                <span><i class="fal fa-comments"></i><a href="#">Com (05)</a></span>
-                            </div>
-                            <h4><a href="blog-details">Samsun Youth Education We Activities Go Amidst</a></h4>
-                            <p>But must explen to you how mistake idea denouncing pleasure and prasng pain was born and completes</p>
-                            <a href="blog-details" class="b-btn b-btn-grey">Read More <i class="far fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+                <?php foreach ($blogs as $post) : ?>
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="blog__item-2 mb-30 ">
                         <div class="blog__thumb fix">
@@ -68,15 +76,23 @@
                                 <span>Dec</span>
                             </div>
                             <div class="blog__meta blog__meta-2">
-                                <span><i class="fal fa-user-circle"></i><a href="#">David Warner</a></span>
+                                <span><i class="fal fa-user-circle"></i><a href="#"><?php echo $post['author']; ?></a></span>
                                 <span><i class="fal fa-comments"></i><a href="#">Com (05)</a></span>
                             </div>
-                            <h4><a href="blog-details">Samsun Youth Education We Activities Go Amidst</a></h4>
-                            <p>But must explen to you how mistake idea denouncing pleasure and prasng pain was born and completes</p>
+                            <h4><a href="blog-details"><?php echo $post['title']; ?></a></h4>
+                            <p><?php echo $post['content']; ?></p>
+                            <form method="POST" action="/BidenBU/blog/delete" style="margin-left: 10px;">
+                                <input type="hidden" name="blog_id " id="blog_id" value="<?php echo $post['post_id']; ?>">
+                                <!-- Assuming 'id' is the primary key of the job -->
+                                <button type="submit" name="deleteemployer" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
                             <a href="blog-details" class="b-btn b-btn-grey">Read More <i class="far fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+                <?php endforeach; ?>
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="blog__item-2 mb-30 ">
                         <div class="blog__thumb fix">
