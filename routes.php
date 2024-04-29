@@ -24,7 +24,8 @@ $router->get('/BidenBU/employer.php','employer/employer.php');
 $router->post('/BidenBU/employer/create','employer/create.php');
 $router->delete('/BidenBU/employer/delete','employer/delete.php');
 
-$router->get('/BidenBU/candidate.php','candidate.php');
+$router->get('/BidenBU/candidate.php','candidate/read.php');
+$router->post('/BidenBU/candidate/create','candidate/create.php');
 
 $router->get('/BidenBU/job.php','job.php');
 $router->get('/BidenBU/job-details.php','job-details.php');

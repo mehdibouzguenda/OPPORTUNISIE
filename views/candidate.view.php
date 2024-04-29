@@ -41,6 +41,7 @@
         <div class="container">
             <div class="candidate__inner">
                 <div class="row">
+<?php if($_SESSION['user'] ?? false): ?>
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="candidate__item text-center mb-75">
 
@@ -60,7 +61,7 @@
 
                         </div>
                     </div>
-
+<?php endif ?>
 
                     <style>
                         .candidate-plus {
@@ -81,7 +82,7 @@
                         <div class="modal-content">
                             <span class="close" onclick="closeAddCandidateModal()">&times;</span>
                             <!-- Candidate form -->
-                            <form id="candidateForm" method="POST" action='/BidenBU/candidate.php'>
+                            <form id="candidateForm" method="POST" action='/BidenBU/candidate/create'>
                                 <input type="text" name="full_name" placeholder="Full Name" required>
                                 <input type="text" name="languages" placeholder="Languages" required>
                                 <input type="number" name="age" placeholder="Age" required>

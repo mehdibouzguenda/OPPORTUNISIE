@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="row">
-
+<?php           if($_SESSION['user'] ?? false): ?>
                 <div class="col-xl-4 col-lg-6 col-md-12">
                     <div class="job-wrapper mb-30">
                         <div class="job-plus">
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-
+                <?php endif ?>
                 <style>
                     .job-plus {
                         display: flex;

@@ -137,6 +137,7 @@
                                                     <div class="job-wrapper">
                                                         <div class="job-instructor-profile">
                                                             <div class="row align-items-center">
+                                                                <?php if($_SESSION['user'] ?? false): ?>
                                                                 <div class="col-xl-4 col-lg-4 col-md-4">
                                                                     <div class="candidate__item text-center mb-75">
 
@@ -156,7 +157,7 @@
 
                                                                     </div>
                                                                 </div>
-
+                                                                <?php endif ?>
 
                                                                 <style>
                                                                     .candidate-plus {
