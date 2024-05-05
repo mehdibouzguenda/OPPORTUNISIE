@@ -38,28 +38,294 @@
     <div class="job-area pt-80 pb-50">
         <div class="container">
             <div class="row mb-45">
+
                 <div class="col-lg-3">
                     <div class="job-filter mb-10">
-                        <select>
+                        <select id="sortSelect">
                             <option>Sort By</option>
-                            <option>Sort name</option>
-                            <option>Sort popular</option>
-                            <option>Sort new</option>
-                            <option>Sort old</option>
+                            <option>Sort By Name</option>
+                            <option>Sort By Salary Min</option>
+                            <option>Sort By Status</option>
                         </select>
                     </div>
                 </div>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+                <script>
+                    $(document).ready(function() {
+                        $('#sortSelect').change(function() {
+                            var selectedOption = $(this).val();
+                            var jobList = $('.job-wrapper');
+
+                            switch (selectedOption) {
+                                case 'Sort By Name':
+                                    sortByName(jobList);
+                                    break;
+                                case 'Sort By Salary Min':
+                                    sortBySalary(jobList);
+                                    break;
+                                case 'Sort By Status':
+                                    sortByStatus(jobList);
+                                    break;
+                                default:
+                                    // Default sorting logic
+                                    break;
+                            }
+                        });
+
+                        function sortByName(list) {
+                            list.sort(function(a, b) {
+                                return $(a).find('h4 a').text().localeCompare($(b).find('h4 a').text());
+                            }).appendTo('#jobsContainer');
+                        }
+
+                        function sortBySalary(list) {
+                            list.sort(function(a, b) {
+                                return parseFloat($(a).find('.job-salary').text().split('$')[1]) - parseFloat($(b).find('.job-salary').text().split('$')[1]);
+                            }).appendTo('#jobsContainer');
+                        }
+
+                        function sortByStatus(list) {
+                            list.sort(function(a, b) {
+                                var statusA = $(a).find('.tag-fea').text().toLowerCase();
+                                var statusB = $(b).find('.tag-fea').text().toLowerCase();
+                                if (statusA === statusB) return 0;
+                                if (statusA === 'featured') return -1;
+                                return 1;
+                            }).appendTo('#jobsContainer');
+                        }
+                    });
+                </script>
+                <!-- Add this script after the HTML code you provided -->
+
+                <!-- <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        // Get the select element
+                        var sortSelect = document.getElementById("sortSelect");
+
+                        // Add event listener for when the selection changes
+                        sortSelect.addEventListener("change", function() {
+                            // Get the selected option value
+                            var selectedOption = sortSelect.options[sortSelect.selectedIndex].value;
+
+                            // Get the job wrapper container
+                            var jobWrapper = document.querySelectorAll(".job-wrapper");
+
+                            // Convert NodeList to array for easier manipulation
+                            var jobArray = Array.from(jobWrapper);
+
+                            // Perform sorting based on the selected option
+                            switch (selectedOption) {
+                                case "Sort By Name":
+                                    jobArray.sort(function(a, b) {
+                                        var nameA = a.querySelector("h4 a").textContent.toUpperCase();
+                                        var nameB = b.querySelector("h4 a").textContent.toUpperCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                                case "Sort By Salary Min":
+                                    jobArray.sort(function(a, b) {
+                                        var salaryA = parseFloat(a.querySelector(".job-salary span").textContent.split("-")[0].trim());
+                                        var salaryB = parseFloat(b.querySelector(".job-salary span").textContent.split("-")[0].trim());
+                                        return salaryA - salaryB;
+                                    });
+                                    break;
+                                case "Sort By Status":
+                                    jobArray.sort(function(a, b) {
+                                        var statusA = a.querySelector(".job-tag .tag-normal").textContent.toUpperCase();
+                                        var statusB = b.querySelector(".job-tag .tag-normal").textContent.toUpperCase();
+                                        if (statusA === statusB) {
+                                            return 0;
+                                        }
+                                        return statusA > statusB ? 1 : -1;
+                                    });
+                                    break;
+                                default:
+                                    // Default sorting, do nothing
+                                    break;
+                            }
+
+                            // Empty the job wrapper container
+                            while (jobWrapper[0]) {
+                                jobWrapper[0].parentNode.removeChild(jobWrapper[0]);
+                            }
+
+                            // Append sorted jobs to the job wrapper container
+                            jobArray.forEach(function(job) {
+                                document.getElementById("jobsContainer").appendChild(job);
+                            });
+                        });
+                    });
+                </script> -->
+
+
+
+
                 <div class="col-lg-3">
+
+
+
+
                     <div class="job-filter mb-10">
-                        <select>
-                            <option>Category</option>
-                            <option>Design</option>
-                            <option>Developer</option>
-                            <option>Photoshop</option>
-                            <option>UX Design</option>
-                        </select>
+                        <button class="list-jobcategory-btn" onclick="openListJobCategoryModal()" style="background-color: #26ae61; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.3s ease;">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="add-jobcategory-btn" onclick="openAddJobCategoryModal()" style="background-color: #26ae61; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.3s ease;">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <span style="margin-left: 5px;">Add / List Category</span>
                     </div>
                 </div>
+
+
+                <div id="addJobCategoryModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeAddJobCategoryModal()">&times;</span>
+                        <h2>Add Job Category</h2>
+                        <!-- Job category form -->
+                        <form id="addJobCategoryForm" method="POST" action="/BidenBU/job.php">
+                            <input type="text" name="category" placeholder="Category" required>
+                            <input type="text" name="subcategory" placeholder="Subcategory" required>
+                            <button type="submit" name="addJobCategory">Add Job Category</button>
+                        </form>
+                    </div>
+                </div>
+
+                <script>
+                    // Function to open the add job category modal
+                    function openAddJobCategoryModal() {
+                        document.getElementById("addJobCategoryModal").style.display = "block";
+                    }
+
+                    // Function to close the modal
+                    function closeAddJobCategoryModal() {
+                        document.getElementById("addJobCategoryModal").style.display = "none";
+                    }
+
+                    // jQuery code for form submission
+                    $(document).ready(function() {
+                        $('#addJobCategoryForm').submit(function(event) {
+                            event.preventDefault(); // Prevent default form submission
+
+                            // Serialize form data
+                            var formData = $(this).serialize();
+
+                            // Send AJAX request
+                            $.ajax({
+                                type: 'POST',
+                                url: '/BidenBU/job.php', // URL to your PHP controller
+                                data: formData,
+                                success: function(response) {
+                                    if (response.trim() === "success") {
+                                        console.log("Job category added successfully");
+                                        closeAddJobCategoryModal();
+                                    } else {
+                                        console.log("Failed to add job category: " + response);
+                                        // Show error message to the user or handle it as needed
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error response
+                                    alert("Error adding job category: " + error); // Show error message or handle it as needed
+                                }
+                            });
+                        });
+                    });
+                </script>
+
+                <div id="listJobCategoryModal" class="modal" style="display: none;">
+                    <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+                        <span class="close" onclick="closeListJobCategoryModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
+                        <h2 style="margin-top: 0;">List of Job Categories</h2>
+                        <ul style="list-style-type: none; padding: 0;">
+                            <?php
+                            $categories = $jobModel->getJobCategories(); // Get job categories
+                            foreach ($categories as $category) {
+                                $categoryId = htmlspecialchars($category['id_category']); // Escape HTML entities
+                                $categoryName = htmlspecialchars($category['category']); // Escape HTML entities
+                                $subcategory = htmlspecialchars($category['subcategory']); // Escape HTML entities
+                                echo '<li id="category-' . $categoryId . '" style="margin-bottom: 10px;">';
+                                echo '<a href="job-details.php?id=' . $categoryId . '" style="text-decoration: none; color: #333;">' . $categoryName . '</a>';
+                                echo '<form id="deleteForm-' . $categoryId . '" method="post" action="/BidenBU/job.php" style="margin-left: 10px;">'; // Echo the form start with unique id
+                                echo '<input type="hidden" name="id_category" value="' . $categoryId . '">'; // Corrected PHP echo statement
+                                echo '<button type="button" onclick="deleteJobCategory(' . $categoryId . ')" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">'; // Changed type to "button" and added onclick event
+                                echo '<i class="fa fa-trash"></i>';
+                                echo '</button>';
+                                echo '</form>'; // Echo the form end
+
+                                // Split subcategories by comma and display each
+                                $subcategories = explode(',', $subcategory);
+                                foreach ($subcategories as $sub) {
+                                    $sub = trim($sub); // Trim whitespace
+                                    if (!empty($sub)) { // Check if subcategory is not empty
+                                        echo '<li style="margin-left: 20px;"><a href="job-details.php?id=' . $categoryId . '" style="text-decoration: none; color: #333;">' . $sub . '</a></li>';
+                                    }
+                                }
+                                echo '</li>'; // Closing the main category <li>
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <script>
+                    function deleteJobCategory(categoryId) {
+                        if (confirm("Are you sure you want to delete this category?")) {
+                            var formData = new FormData();
+                            formData.append('id_category', categoryId);
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('POST', '/BidenBU/job.php', true);
+                            xhr.onload = function() {
+                                if (xhr.status === 200) {
+                                    if (xhr.responseText.trim() === 'success') {
+                                        document.getElementById('category-' + categoryId).remove();
+                                    }
+                                } else {
+                                    alert("Error: " + xhr.statusText);
+                                }
+                            };
+                            xhr.onerror = function() {
+                                alert("Request failed.");
+                            };
+                            xhr.send(formData);
+                        }
+                    }
+                </script>
+
+
+
+
+
+
+
+                <script>
+                    // Function to open the list job category modal
+                    function openListJobCategoryModal() {
+                        document.getElementById("listJobCategoryModal").style.display = "block";
+                    }
+
+                    // Function to close the modal
+                    function closeListJobCategoryModal() {
+                        document.getElementById("listJobCategoryModal").style.display = "none";
+                    }
+                </script>
+
+
+
+
+
+
+
                 <div class="col-lg-3">
                     <div class="job-filter mb-10">
                         <select>
@@ -111,13 +377,29 @@
                 </style>
 
                 <!-- Modal -->
+                <!-- Modal -->
+                <!-- Modal -->
                 <div id="addJobModal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closeAddJobModal()">&times;</span>
                         <!-- Job form -->
                         <form id="addJobForm" method="POST" action="/BidenBU/job.php">
                             <input type="text" name="jobType" placeholder="Job Type" required>
-                            <input type="text" name="category" placeholder="Category" required>
+                            <select name="categoryId" required>
+                                <?php
+                                // Get categories from the job_category table
+                                $categories = $jobModel->getJobCategories();
+
+                                // Filter out duplicate categories
+                                $uniqueCategories = [];
+                                foreach ($categories as $category) {
+                                    if (!in_array($category['category'], $uniqueCategories)) {
+                                        echo '<option value="' . $category['id_category'] . '">' . $category['category'] . '</option>';
+                                        $uniqueCategories[] = $category['category'];
+                                    }
+                                }
+                                ?>
+                            </select>
                             <input type="text" name="location" placeholder="Location" required>
                             <input type="number" name="offeredSalaryMin" placeholder="Offered Salary Min" required>
                             <input type="number" name="offeredSalaryMax" placeholder="Offered Salary Max" required>
@@ -135,6 +417,9 @@
                         </form>
                     </div>
                 </div>
+
+
+
 
 
                 <style>
@@ -444,68 +729,73 @@
                     });
                 </script> -->
 
-                <?php foreach ($jobs as $job) : ?>
-                    <div class="col-xl-4 col-lg-6 col-md-12">
-                        <div class="job-wrapper mb-30">
-                            <div class="banck-icon">
-                                <!-- Assuming you have icons for different job types -->
-                                <?php
-                                // Define icons for different job types
-                                $icons = [
-                                    'Full Time' => 'flaticon-full-time-icon',
-                                    'Part Time' => 'flaticon-part-time-icon',
-                                    'Freelance' => 'flaticon-freelance-icon',
-                                    'Contract' => 'flaticon-contract-icon'
-                                ];
-                                ?>
-                                <i class="<?php //echo $icons[$job['job_type']]; 
-                                            ?>"></i>
-
-                            </div>
-                            <div class="job-tag mb-30">
-                                <!-- You can add conditions for featured jobs -->
-                                <span class="tag-normal"><?php echo strtolower($job['job_type']); ?></span>
-                                <?php if ($job['status'] === 'Featured') : ?>
-                                    <span class="tag-fea">Featured</span>
-                                <?php elseif ($job['status'] === 'Urgent') : ?>
-                                    <span class="tag-urgent">Urgent</span>
-                                <?php else : ?>
-                                    <span class="tag-fea">Normal</span>
-                                <?php endif; ?>
-                            </div>
-                            <div class="job-instructor-profile mb-30">
-                                <div class="job-instructor-img f-left">
-                                    <img src="assets/img/job/<?php echo $job['employer_id']; ?>.png" alt="">
+                <div class="row" id="jobsContainer">
+                    <?php foreach ($jobs as $job) : ?>
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <div class="job-wrapper mb-30">
+                                <div class="banck-icon">
+                                    <!-- Assuming you have icons for different job types -->
+                                    <?php
+                                    // Define icons for different job types
+                                    $icons = [
+                                        'Full Time' => 'flaticon-full-time-icon',
+                                        'Part Time' => 'flaticon-part-time-icon',
+                                        'Freelance' => 'flaticon-freelance-icon',
+                                        'Contract' => 'flaticon-contract-icon'
+                                    ];
+                                    ?>
+                                    <!-- <i class="<?php echo $icons[$job['job_type']]; ?>"></i> -->
                                 </div>
-                                <div class="job-instructor-title">
-                                    <h4><a href="job-details.php"><?php echo $job['category']; ?></a></h4>
-                                    <span><i class="far fa-map-marker-alt"></i> <?php echo $job['location']; ?></span>
+                                <div class="job-tag mb-30">
+                                    <!-- You can add conditions for featured jobs -->
+                                    <span class="tag-normal"><?php echo strtolower($job['job_type']); ?></span>
+                                    <?php if ($job['status'] === 'Featured') : ?>
+                                        <span class="tag-fea">Featured</span>
+                                    <?php elseif ($job['status'] === 'Urgent') : ?>
+                                        <span class="tag-urgent">Urgent</span>
+                                    <?php else : ?>
+                                        <span class="tag-fea">Normal</span>
+                                    <?php endif; ?>
                                 </div>
-                            </div>
-                            <div class="job-content">
-                                <h4><a href="job-details.php"><?php echo $job['label']; ?></a></h4>
-                                <p><?php echo $job['description']; ?></p>
-                                <div class="job-salary" style="display: flex; align-items: center;">
-                                    <span style="flex: 1;"><i class="fal fa-usd-circle"></i> <?php echo $job['offered_salary_min']; ?> - <?php echo $job['offered_salary_max']; ?></span>
-                                    <form method="post" action="/BidenBU/job.php" style="margin-left: 10px;">
-                                        <input type="hidden" name="job_id" value="<?php echo $job['job_id']; ?>">
-                                        <!-- Assuming 'id' is the primary key of the job -->
-                                        <button type="submit" name="deleteJob" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                    <form style="margin-left: 10px;" onsubmit="return false;">
-                                        <button onclick="openUpdateJobModal(<?php echo $job['job_id']; ?>, '<?php echo $job['job_type']; ?>', '<?php echo $job['category']; ?>', '<?php echo $job['location']; ?>', <?php echo $job['offered_salary_min']; ?>, <?php echo $job['offered_salary_max']; ?>, '<?php echo $job['post_date']; ?>', <?php echo $job['exp_required']; ?>, '<?php echo $job['gender']; ?>', '<?php echo $job['industry']; ?>', '<?php echo $job['label']; ?>', <?php echo $job['applications_received']; ?>, '<?php echo $job['app_end_date']; ?>', <?php echo $job['employer_id']; ?>, '<?php echo $job['description']; ?>', '<?php echo $job['status']; ?>')" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
-                                            <i class="fa fa-pencil"></i> <!-- Assuming you're using Font Awesome -->
-                                        </button>
-                                    </form>
+                                <div class="job-instructor-profile mb-30">
+                                    <div class="job-instructor-img f-left">
+                                        <img src="assets/img/job/<?php echo $job['employer_id']; ?>.png" alt="">
+                                    </div>
+                                    <div class="job-instructor-title">
+                                        <?php
+                                        $category = $jobModel->getJobCategoryById($job['category_id']);
+                                        if ($category) {
+                                            echo '<h4><a href="job-details.php">' . $category['category'] . '</a></h4>';
+                                        } else {
+                                            echo '<h4><a href="job-details.php">Category Not Found</a></h4>';
+                                        }
+                                        ?>
+                                        <span><i class="far fa-map-marker-alt"></i> <?php echo $job['location']; ?></span>
+                                    </div>
                                 </div>
-
-
+                                <div class="job-content">
+                                    <h4><a href="job-details.php"><?php echo $job['label']; ?></a></h4>
+                                    <p><?php echo $job['description']; ?></p>
+                                    <div class="job-salary" style="display: flex; align-items: center;">
+                                        <span style="flex: 1;"><i class="fal fa-usd-circle"></i> <?php echo $job['offered_salary_min']; ?> - <?php echo $job['offered_salary_max']; ?></span>
+                                        <form method="post" action="/BidenBU/job.php" style="margin-left: 10px;">
+                                            <input type="hidden" name="job_id" value="<?php echo $job['job_id']; ?>">
+                                            <!-- Assuming 'id' is the primary key of the job -->
+                                            <button type="submit" name="deleteJob" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        <form style="margin-left: 10px;" onsubmit="return false;">
+                                            <button onclick="openUpdateJobModal(<?php echo $job['job_id']; ?>, '<?php echo $job['job_type']; ?>', '<?php echo $job['category_id']; ?>', '<?php echo $job['location']; ?>', <?php echo $job['offered_salary_min']; ?>, <?php echo $job['offered_salary_max']; ?>, '<?php echo $job['post_date']; ?>', <?php echo $job['exp_required']; ?>, '<?php echo $job['gender']; ?>', '<?php echo $job['industry']; ?>', '<?php echo $job['label']; ?>', <?php echo $job['applications_received']; ?>, '<?php echo $job['app_end_date']; ?>', <?php echo $job['employer_id']; ?>, '<?php echo $job['description']; ?>', '<?php echo $job['status']; ?>')" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                                <i class="fa fa-pencil"></i> <!-- Assuming you're using Font Awesome -->
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
 
 
             </div>
