@@ -22,11 +22,11 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="page__title-content text-center mt-80">
-                        <h2>Blog Standard</h2>
+                        <h2>Condidate</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
                                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Blog Standard</li>
+                                <li class="breadcrumb-item active" aria-current="page">condidate</li>
                             </ol>
                         </nav>
                     </div>
