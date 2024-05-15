@@ -61,7 +61,7 @@
 
                         </div>
                     </div>
-<?php endif ?>
+<?php endif
 
                     <style>
                         .candidate-plus {

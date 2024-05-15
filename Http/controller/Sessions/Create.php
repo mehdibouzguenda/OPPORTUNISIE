@@ -9,33 +9,32 @@ $username=$_POST["username"];
 
 $password=$_POST["password"];
 
-//$form = new LoginForm();
+$form = new LoginForm();
+
+$errors=[];
+if(!$form->Validate($username,$password)){
+    return require('views/Sessions/login.view.php');
+}
+
+
+
+
+//// validation the form inputs.
+//$errors=[];
 //
-//if(!$form->Validate($username,$password)){
 //
-//    return require('views/Sessions/login.show.php');
+//if(!Validator::string($username,5,255)){
+//    $errors['username']='Please povide a valid username ';
+//}
+//else if(!Validator::string($password,8,255)){
+//    $errors['username']='Please povide a valid password ';
+//}
+//
+//
+//if(!empty($errors)){
+//    return require('views/Sessions/login.view.php');
 //
 //}
-
-
-
-
-// validation the form inputs.
-$errors=[];
-
-
-if(!Validator::string($username,5,255)){
-    $errors['username']='Please povide a valid username ';
-}
-else if(!Validator::string($password,8,255)){
-    $errors['username']='Please povide a valid password ';
-}
-
-
-if(!empty($errors)){
-    return require('views/Sessions/login.view.php');
-
-}
 
 
 //check if the account already exist
@@ -45,7 +44,7 @@ $db=App::resolve( Database::class);
 //$config= require('config.php');
 //$db=new Database($config['database']);
 
-$user=$db->query('select * from users where username= :username',[
+$user=$db->query('select * from user where username= :username',[
     'username'=>$username,
 ])->find();
 

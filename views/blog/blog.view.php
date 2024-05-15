@@ -37,6 +37,7 @@
     <section class="grid__item pt-80 pb-50">
         <div class="container">
             <div class="row">
+                <?php if($_SESSION['user'] ?? false): ?>
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="blog__item-2 mb-30 ">
 
@@ -61,9 +62,11 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+                <?php endif ?>
                 <?php foreach ($blogs as $post) : ?>
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="blog__item-2 mb-30 ">
