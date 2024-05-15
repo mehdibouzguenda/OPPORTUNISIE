@@ -12,8 +12,8 @@ $role=$_POST['Role'];
 // validation the form inputs.
 $errors=[];
 
-if(!Validator::string($username,5,255)){
-    $errors['username']='Please povide a valid username ';
+/*if(!Validator::string($username,5,255)){
+    $errors['info']='Please povide a valid username ';
 }
 else if(!Validator::string($password,8,255)){
     $errors['username']='Please povide a valid password ';
@@ -28,7 +28,7 @@ else if(!Validator::string($phone,8,8)){
 if(!empty($errors)){
     return require('views/registration/register.view.php');
 
-}
+}*/
 
 //check if the account already exist
 
@@ -56,7 +56,7 @@ if($user){
     ]);
     // mark that the user has logged in.
 
-    login($username);
+    login($user);
 //    //$_SESSION['logged_in']=true;
 //    $_SESSION['user']=[
 //        'email'=>$email

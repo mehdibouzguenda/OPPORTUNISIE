@@ -28,9 +28,12 @@ function view($path,$attributes=[]){
 }
 
 function login($user){
-    $_SESSION['user']=[
-        'username'=>$user
-    ];
+    $_SESSION['id']=$user['id'];
+    $_SESSION['role']=$user['role'];
+    $_SESSION['username']=$user['username'];
+    $_SESSION['email']=$user['email'];
+    $_SESSION['phone']=$user['phone'];
+    $_SESSION['user']=$user;
     session_regenerate_id(true);
 }
 

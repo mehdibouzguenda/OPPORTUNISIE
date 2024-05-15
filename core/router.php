@@ -74,6 +74,7 @@ class router
 //                if ($route['middleware']==='auth'){
 //                    (new Auth)->handle();
 //                }
+                //dd('Http/controller/'.$route['controller']);
                 return require ('Http/controller/'.$route['controller']);
             }
         }

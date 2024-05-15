@@ -177,7 +177,7 @@
                                             <textarea placeholder="comment"></textarea>
                                             <i class="far fa-pen-alt"></i>
                                         </div>
-                                        <input type="hidden" name="blog_id " id="blog_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                        <input type="hidden" name="blog_id " id="blog_id" value="100">
                                         <button type="submit" class="b-btn">Send comment <i class="far fa-arrow-right"></i></button>
                                     </form>
                                 </div>

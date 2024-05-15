@@ -170,6 +170,7 @@
 <script src="assets/js/jquery.magnific-popup.min.js"></script>
 <script src="assets/js/nice-select.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/addedFunctions.js"></script>
 </body>
 
 

@@ -5,8 +5,7 @@
     <main>
 
         <!-- page title area start -->
-        <section class="page__title page__title-height d-flex align-items-center"
-                 data-background="assets/img/page-title/page-title-1.jpg">
+        <section class="page__title page__title-height d-flex align-items-center" data-background="assets/img/page-title/page-title-1.jpg">
             <div class="hero-shape">
                 <span class="circle"></span>
                 <span class="circle circle-yellow"></span>
@@ -20,7 +19,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="page__title-content text-center mt-80">
-                            <h2>Login</h2>
+                            <h2>Enter received code</h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -41,8 +40,7 @@
                     <div class="col-xl-6 col-lg-6 offset-lg-3 offset-xl-3">
                         <div class="section-title text-center ml-50 mr-50 mb-20">
                             <h2>Log In </h2>
-                            <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-                                consequatur</p>
+                            <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</p>
                         </div>
                     </div>
                 </div>
@@ -50,8 +48,7 @@
                     <div class="col-12">
                         <div class="signin-popup-box d-flex justify-content-center">
                             <div class="login-form">
-
-                                <form onsubmit="return login_Validitor()" action="/BidenBU/login" method="post">
+                                <form action="/BidenBU/RestPasswordCode" method="post" onsubmit="return restCodeValidatior()" >
                                     <div class="alert alert-success text-center" id="infoMessage"
                                          style="display: none;">
                                     </div>
@@ -66,19 +63,14 @@
                                     ?>
 
                                     <div class="input-text">
-                                        <input id="email" name="email" type="text" placeholder="Email">
+                                        <input id="code" name="code"  type="text" placeholder="Code">
                                         <i class="la la-user"></i>
                                     </div>
-                                    <div class="input-text input-pass">
-                                        <input id="password" name="password" type="password" placeholder="********">
-                                    </div>
-                                    <p class="remember-label">
-                                        <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember
-                                            Me</label>
-                                    </p>
-                                    <a href="forgotPassword" title="">Forgot Password?</a>
+
+                                    <a href="login" title="">back</a>
                                     <br>
-                                    <button type="submit">Login</button>
+
+                                    <button type="submit">send</button>
                                 </form>
                                 <div class="extra-login">
                                     <span>Or</span>

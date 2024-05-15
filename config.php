@@ -11,5 +11,14 @@ return [
             'token'=>'',
             'secret'=>''
         ]
+    ]
+    'phpmailer'=>[
+        'host'=>'smtp.gmail.com',
+        'port'=>587,
+        'username'=>'mehdibouxahmedjer@gmail.com',
+        'password'=>'nijuqntwtbgchxzx',
+
+
     ]*/
 ];
+

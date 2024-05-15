@@ -5,19 +5,16 @@ use core\App;
 use core\Validator;
 use Http\Forms\LoginForm;
 
-$username=$_POST["username"];
+$username=$_POST["email"];
 
 $password=$_POST["password"];
-
-$form = new LoginForm();
+$errors=[];
+/*$form = new LoginForm();
 
 $errors=[];
 if(!$form->Validate($username,$password)){
     return require('views/Sessions/login.view.php');
-}
-
-
-
+}*/
 
 //// validation the form inputs.
 //$errors=[];
@@ -49,16 +46,18 @@ $user=$db->query('select * from user where username= :username',[
 ])->find();
 
 if(!$user){
-    $errors['username']="No matching account found for this user name";
+    $errors['info']="No matching account found for this Email";
     //dd($errors);
     return require('views/Sessions/login.view.php');
 }
 else if (password_verify($password,$user['password'])){
     //header('location : /BidenBU/ ');
-    $_SESSION['user']=[
-        'username'=>$username
-    ];
-
+    $_SESSION['id']=$user['id'];
+    $_SESSION['role']=$user['role'];
+    $_SESSION['username']=$username;
+    $_SESSION['email']=$user['email'];
+    $_SESSION['phone']=$user['phone'];
+    $_SESSION['user']=$user;
     require('views/index.view.php');
     exit();
 }else{
