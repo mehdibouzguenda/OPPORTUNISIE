@@ -8,7 +8,7 @@ use core\App;
 
 $db=App::resolve( Database::class);
 
-$db->query('delete FROM `employer` where employer_id = :id',['id'=>$_POST['employer_id_']]);
+$db->query('delete FROM `user` where user_id = :id',['id'=>$_POST['employer_id_']]);
 
 
 //header("Refresh:0");

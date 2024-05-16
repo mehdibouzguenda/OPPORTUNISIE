@@ -40,7 +40,7 @@
                     <div class="blog__wrapper white-bg">
                         <div class="blog__details">
                             <div class="blog__content white-bg">
-                                <h3><a href="#">Inspire Design Decision With Ott Storch When Idea How To Space And Kern Punctuation</a></h3>
+                                <h3><a href="#"><?php echo $post[0]["title"]?></a></h3>
                                 <div class="blog__meta">
                                     <span><i class="fal fa-user-circle"></i><a href="#">By Somalia Doe</a></span>
                                     <span><i class="fal fa-calendar-alt"></i>25 Nov 2020</span>
@@ -172,12 +172,25 @@
                                 </div>
                                 <div class="post-comment-form grey-bg">
                                     <h4>Reply Comments</h4>
-                                    <form method="post" action="/BidenBU/blog/comment/create">
+                                    <form method="post" action="/BidenBU/blog/comment/create" onsubmit="return cmntValidator()">
+                                        <div class="alert alert-danger text-center" id="infoMessage"
+                                             style="display: none;">
+                                        </div>
+                                        <?php
+                                        if (isset($errors['info'])) {
+                                            ?>
+                                            <div class="alert alert-danger text-center">
+                                                <?php echo $errors['info']; ?>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+
                                         <div class="post-input">
-                                            <textarea placeholder="comment"></textarea>
+                                            <textarea id="cmnt" name="cmnt" placeholder="comment"></textarea>
                                             <i class="far fa-pen-alt"></i>
                                         </div>
-                                        <input type="hidden" name="blog_id " id="blog_id" value="100">
+                                        <input type="hidden" name="blog_id " id="blog_id" value="<?php echo $_SESSION['id'] ?>">
                                         <button type="submit" class="b-btn">Send comment <i class="far fa-arrow-right"></i></button>
                                     </form>
                                 </div>

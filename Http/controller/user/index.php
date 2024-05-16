@@ -12,8 +12,8 @@ $db=App::resolve( Database::class);
 //$config= require('config.php');
 //$db=new Database($config['database']);
 
-$user=$db->query('select * from users where username= :username',[
-    'username'=>$_SESSION['user']['username']
+$user=$db->query('select * from user where email= :email',[
+    'email'=>$_SESSION['user']['email']
 ])->find();
 //dd($user);
 

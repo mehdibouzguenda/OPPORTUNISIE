@@ -2,16 +2,16 @@
 use core\Database;
 use core\App;
 use core\Validator;
-//dd($_POST);
-$username=$_POST["name"];
-$email=$_POST["email"];
+
+$username=$_SESSION['username'];
+$email=$_SESSION['email'];
 $title=$_POST["title"];
 $text=$_POST['cmnt'];
 
 // validation the form inputs.
 $errors=[];
 
-if(!Validator::string($username,5,255)){
+/*if(!Validator::string($username,5,255)){
     $errors['username']='Please povide a valid username ';
 }
 else if(!Validator::email($email)){
@@ -25,7 +25,7 @@ else if(!Validator::string($title,3,255)){
 if(!empty($errors)){
     require('views/blog/blog-create.view.php');
 
-}
+}*/
 
 //check if the account already exist
 
@@ -34,23 +34,27 @@ $db=App::resolve( Database::class);
 //$config= require('config.php');
 //$db=new Database($config['database']);
 
-$user=$db->query('select * from users where email= :email',[
+$user=$db->query('select * from user where email= :email',[
     'email'=>$email
 ])->find();
 
 if($user){
-    $db->query('INSERT INTO `posts`(`title`, `content`, `author`) VALUES (:title,:text,:username)',[
+    $db->query('INSERT INTO `posts`(`user_id`,`title`, `content`, `author`) VALUES (:userid,:title,:text,:username)',[
+        'userid'=>$_SESSION['id'],
         'title'=>$title,
         'username'=>$username,
         'text'=>$text,
 
     ]);
     //dd("done");
-    //require('/BidenBU/blog/add-blog');
-    require('views/blog/blog.view.php');
+    //require('/BidenBU/blog');
+    //header('/BidenBU/blog');
+    //require('views/blog/blog.view.php');
+    //require ('views/index.view.php');
+    echo '<script>window.location.href = "/BidenBU/blog";</script>';
     exit();
 
 }else{
-    $errors['username']='you are not user yet ';
+    $errors['info']='you are not user yet ';
     exit();
 }

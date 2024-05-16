@@ -225,20 +225,20 @@
 
                                     <div class="candidate__info mt-25 mb-30">
                                         <span><i class="far fa-map-marker-alt"></i> <?php echo $candidate['location']; ?></span>
-                                        <span><i class="far fa-usd-circle"></i> <?php echo $candidate['salary_range']; ?></span>
+                                        <span><i class="far fa-usd-circle"></i> <?php echo $candidate['expected_salary_range']; ?></span>
                                     </div>
                                 </div>
                                 <div class="candidate__btn">
                                     <div style="text-align: center;">
                                         <form method="post" action="/BidenBU/candidate.php" style="margin-left: 10px; display: inline-block;">
-                                            <input type="hidden" name="candidate_id" value="<?php echo $candidate['candidate_id']; ?>">
+                                            <input type="hidden" name="candidate_id" value="<?php echo $candidate['user_id']; ?>">
                                             <!-- Assuming 'id' is the primary key of the job -->
                                             <button type="submit" name="deleteCandidate" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                         <form method="post" action="/BidenBU/candidate.php" style="margin-left: 10px; display: inline-block;">
-                                            <button onclick="openUpdateJobModal(<?php echo $candidate['candidate_id']; ?>)" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
+                                            <button onclick="openUpdateJobModal(<?php echo $candidate['user_id']; ?>)" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
                                                 <i class="fa fa-pencil"></i> <!-- Assuming you're using Font Awesome -->
                                             </button>
                                         </form>

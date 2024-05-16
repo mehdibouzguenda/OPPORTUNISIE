@@ -66,13 +66,13 @@
 
                                         <form action="/BidenBU/register" method="post"
                                               onsubmit="return registrationValidator() ">
-                                            <div class="alert alert-success text-center" id="infoMessage"
+                                            <div class="alert alert-danger text-center" id="infoMessage"
                                                  style="display: none;">
                                             </div>
                                             <?php
                                             if (isset($errors['info'])) {
                                                 ?>
-                                                <div class="alert alert-success text-center">
+                                                <div class="alert alert-danger text-center">
                                                     <?php echo $errors['info']; ?>
                                                 </div>
                                                 <?php
@@ -119,13 +119,13 @@
                                 <div class="tab-pane fade" id="Employer" role="tabpanel" aria-labelledby="Employer-tab">
                                     <div class="login-form">
                                         <form action="/BidenBU/register" method="post"  onsubmit="return registrationValidator1() ">
-                                            <div class="alert alert-success text-center" id="infoMessage1"
+                                            <div class="alert alert-danger text-center" id="infoMessage1"
                                                  style="display: none;">
                                             </div>
                                             <?php
                                             if (isset($errors['info'])) {
                                                 ?>
-                                                <div class="alert alert-success text-center">
+                                                <div class="alert alert-danger text-center">
                                                     <?php echo $errors['info']; ?>
                                                 </div>
                                                 <?php

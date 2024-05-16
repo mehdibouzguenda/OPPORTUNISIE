@@ -52,13 +52,13 @@
                             <div class="login-form">
 
                                 <form onsubmit="return login_Validitor()" action="/BidenBU/login" method="post">
-                                    <div class="alert alert-success text-center" id="infoMessage"
+                                    <div class="alert alert-danger text-center" id="infoMessage"
                                          style="display: none;">
                                     </div>
                                     <?php
                                     if (isset($errors['info'])) {
                                         ?>
-                                        <div class="alert alert-success text-center">
+                                        <div class="alert alert-danger text-center">
                                             <?php echo $errors['info']; ?>
                                         </div>
                                         <?php

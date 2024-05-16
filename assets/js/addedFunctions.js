@@ -166,7 +166,7 @@ function registrationValidator1(){
         document.getElementById("infoMessage1").style.display = "block";
         return false;
     }
-    if (!Validator.String(username, 6,255)) {
+    if (!Validator.String(fullname, 6,255)) {
         document.getElementById("infoMessage1").textContent = "Please enter a valid Full name.";
         document.getElementById("infoMessage1").style.display = "block";
         return false;
@@ -175,4 +175,33 @@ function registrationValidator1(){
     document.getElementById("infoMessage1").style.display = "none";
     return true;
 
+}
+
+function ValidatoraddBlog(){
+    const title = document.getElementById("title").value;
+    const cmnt = document.getElementById("cmnt").value;
+
+    if (!Validator.String(title, 6,255)) {
+        document.getElementById("infoMessage").textContent = "Please enter a valid Title.";
+        document.getElementById("infoMessage").style.display = "block";
+        return false;
+    }
+    if (!Validator.String(cmnt, 6,500)) {
+        document.getElementById("infoMessage").textContent = "Please enter a valid comment.";
+        document.getElementById("infoMessage").style.display = "block";
+        return false;
+    }
+    document.getElementById("infoMessage").style.display = "none";
+    return true;
+}
+
+function cmntValidator(){
+    const cmnt = document.getElementById("cmnt").value;
+    if (!Validator.String(cmnt, 6,500)) {
+        document.getElementById("infoMessage").textContent = "Please enter a valid comment.";
+        document.getElementById("infoMessage").style.display = "block";
+        return false;
+    }
+    document.getElementById("infoMessage").style.display = "none";
+    return true;
 }

@@ -38,7 +38,7 @@ $db=App::resolve( Database::class);
 //$config= require('config.php');
 //$db=new Database($config['database']);
 
-$db->query('INSERT INTO `employer`(job_type ,company_name,employees,founded_year,website)  VALUES(:job_type,:company_name,:employees,:founded_year,:website)',[
+$db->query('INSERT INTO `user`(job_type ,company_name,employees,founded_year,website)  VALUES(:job_type,:company_name,:employees,:founded_year,:website)',[
         'job_type'=>$job_type,
         'company_name'=>$company_name,
         'employees'=>$employees,

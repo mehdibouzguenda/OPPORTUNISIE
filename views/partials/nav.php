@@ -28,7 +28,7 @@
 
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/blog') {echo'active' ; } ?>"><a href="blog">Blog <i class="far"></i></a> </li>
                                     <?php           if($_SESSION['user'] ?? false): ?>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/reclamation') {echo'active' ; } ?>"><a href="about">Reclamation</a></li>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/reclamation') {echo'active' ; } ?>"><a href="reclamation">Reclamation</a></li>
                                     <?php endif ?>
                                 </ul>
                             </nav>

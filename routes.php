@@ -12,9 +12,14 @@
 $router->get('/BidenBU/','index.php');
 $router->get('/BidenBU/index','index.php');
 
-$router->get('/BidenBU/blog/add-blog','blog/show.php');
+$router->get('/BidenBU/add-blog','blog/show.php');
 $router->post('/BidenBU/blog/create','blog/create.php');
+//$router->get('/BidenBU/blog/create','blog/blog.php');
+
 $router->delete('/BidenBU/blog/delete','blog/delete.php');
+$router->get('/BidenBU/blog','blog/blog.php');
+$router->post('/BidenBU/blog-details','blog/blog-details/index.php');
+$router->get('/BidenBU/blog-details/show','blog/blog-details/show.php');
 
 $router->post('/BidenBU/blog/comment/create','blog/blog-details/comment/create.php');
 
@@ -30,8 +35,7 @@ $router->post('/BidenBU/candidate/create','candidate/create.php');
 $router->get('/BidenBU/job','job.php');
 $router->get('/BidenBU/job-details.php','job-details.php');
 
-$router->get('/BidenBU/blog','blog/blog.php');
-$router->get('/BidenBU/blog-details','blog/blog-details/index.php');
+
 
 $router->get('/BidenBU/login','Sessions/login.php');
 $router->get('/BidenBU/register','registration/register.php')->only('guest');
@@ -48,6 +52,8 @@ $router->get('/BidenBU/user-details','user/index.php');
 $router->patch('/BidenBU/userUpdate','user/update.php');
 $router->delete('/BidenBU/userDelete','user/delete.php');
 
-$router->get('/BidenBU/user-details','user/index.php');
+$router->get('/BidenBU/reclamation','Reclamation/Reclamation.php');
+$router->post('/BidenBU/reclamation','Reclamation/Reclamation.php');
+
 
 

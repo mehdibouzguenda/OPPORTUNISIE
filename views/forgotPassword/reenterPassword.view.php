@@ -49,7 +49,7 @@
                         <div class="signin-popup-box d-flex justify-content-center">
                             <div class="login-form">
                                 <form action="/BidenBU/newPassword" method="post" onsubmit="return newPasswordValidator() " >
-                                    <div class="alert alert-success text-center" id="infoMessage"
+                                    <div class="alert alert-danger text-center" id="infoMessage"
                                          style="display: none;">
                                     </div>
                                     <?php

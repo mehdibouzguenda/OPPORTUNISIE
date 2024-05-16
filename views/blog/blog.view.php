@@ -1,4 +1,5 @@
-<?php require('views/partials/head.php') ?>
+<?php
+require('views/partials/head.php') ?>
 <?php require('views/partials/nav.php') ?>
 
 
@@ -53,10 +54,10 @@
                                         <br></br>
 
                                         <!-- "+" button to trigger pop-up window -->
-                                        <button class="add-job-btn" onclick="location.href='/BidenBU/blog/add-blog';" style="background-color: #26ae61; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.3s ease;">
+                                        <a class="add-job-btn" href='add-blog' style="background-color: #26ae61; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; transition: background-color 0.3s ease;">
                                             <i class="fas fa-plus"></i>
 
-                                        </button>
+                                        </a>
 
 
                                     </div>
@@ -90,8 +91,13 @@
                                 <button type="submit" name="deleteemployer" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
                                     <i class="fa fa-trash"></i>
                                 </button>
+                                <input id="id_post" name="id_post" type="hidden" value="<?php echo $post['post_id']; ?>">
                             </form>
-                            <a href="blog-details" class="b-btn b-btn-grey">Read More <i class="far fa-arrow-right"></i></a>
+                            <form id="blogForm" method="POST" action="/BidenBU/blog-details">
+                                <input id="id_post" name="id_post" type="hidden" value="<?php echo $post['post_id']; ?>">
+                                <button type="submit"  class="b-btn b-btn-grey" >Read More<i class="far fa-arrow-right"></i> </button>
+
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -39,20 +39,22 @@
                 <div class="row">
                     <div class="col-xl-8 col-lg-6">
                         <div class="contact__form">
-                            <form action="/BidenBU/blog/create" method="post">
+                                <form action="/BidenBU/blog/create" method="post" onsubmit="return ValidatoraddBlog()">
+                                    <div class="alert alert-success text-center" id="infoMessage"
+                                         style="display: none;">
+                                    </div>
+                                    <?php
+                                    if (isset($errors['info'])) {
+                                        ?>
+                                        <div class="alert alert-success text-center">
+                                            <?php echo $errors['info']; ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                 <div class="row">
-                                    <div class="col-xl-6">
-                                        <div class="contact__input">
-                                            <input id="name" name="name"  type="text" placeholder="Your Full Name">
-                                            <i class="far fa-user"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <div class="contact__input">
-                                            <input id="email" name="email"  type="email" placeholder="Email Address">
-                                            <i class="far fa-envelope"></i>
-                                        </div>
-                                    </div>
+
+
                                     <div class="col-xl-12">
                                         <div class="contact__input">
                                             <input id="title" name="title"  type="text" placeholder="Blog Title">
@@ -62,13 +64,10 @@
                                     <div class="col-xl-12">
                                         <div class="contact__input">
                                             <textarea id="cmnt" name="cmnt"  placeholder="Write here"></textarea>
-                                            <i class="far fa-pen-alt"></i>nm
+                                            <i class="far fa-pen-alt"></i>
                                         </div>
                                     </div>
                                     <br>
-                                    <?php if(isset($errors['username'])) :?>
-                                        <p style="color:red;"><?= $errors['username'] ?></p>
-                                    <?php endif; ?>
                                     <div class="col-xl-12">
                                         <button type="submit" class="b-btn b-btn-green w-100">Send Blog <i class="far fa-arrow-right"></i></button>
                                     </div>

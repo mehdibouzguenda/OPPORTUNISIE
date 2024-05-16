@@ -24,7 +24,7 @@ if (!empty($errors)) {
 $db = App::resolve(Database::class);
 
 //if (password_verify($password, $user['password'])) {
-$db->query('delete FROM `users` where username = :username and email = :email ',
+$db->query('delete FROM `user` where username = :username and email = :email ',
 
     [   'username' => $username,
         'email'=>$email

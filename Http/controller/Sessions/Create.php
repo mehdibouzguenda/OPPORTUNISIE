@@ -54,6 +54,7 @@ else if (password_verify($password,$user['password'])){
     //header('location : /BidenBU/ ');
     $_SESSION['id']=$user['user_id'];
     $_SESSION['role']=$user['role'];
+    $_SESSION['fullname'] = $user['full_name'];
     $_SESSION['username']=$username;
     $_SESSION['email']=$user['email'];
     $_SESSION['phone']=$user['phone'];

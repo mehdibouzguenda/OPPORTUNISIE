@@ -20,7 +20,7 @@ $db=App::resolve( Database::class);
 //$config= require('config.php');
 //$db=new Database($config['database']);
 
-$db->query('INSERT INTO candidates (full_name, languages, age, location, expected_salary_range, salary_range, experience_years) VALUES (:fullName, :languages, :age, :location, :expectedSalaryRange, :salaryRange, :experienceYears)',[
+$db->query('INSERT INTO user (full_name, languages, age, location, expected_salary_range, experience_years) VALUES (:fullName, :languages, :age, :location, :expectedSalaryRange, :experienceYears)',[
     'fullName'=>$fullName,
     'languages'=>$languages,
     'age'=>$age,
