@@ -137,6 +137,7 @@
                                                     <div class="job-wrapper">
                                                         <div class="job-instructor-profile">
                                                             <div class="row align-items-center">
+                                                                <?php if($_SESSION['user'] ?? false): ?>
                                                                 <div class="col-xl-4 col-lg-4 col-md-4">
                                                                     <div class="candidate__item text-center mb-75">
 
@@ -156,7 +157,7 @@
 
                                                                     </div>
                                                                 </div>
-
+                                                                <?php endif ?>
 
                                                                 <style>
                                                                     .candidate-plus {
@@ -331,7 +332,7 @@
                                                 <i class="fas fa-star"></i>
                                             </div>
                                             <form method="POST" action="/BidenBU/employer/delete" style="margin-left: 10px;">
-                                                <input type="hidden" name="employer_id " id="employer_id" value="<?php echo $employer['employer_id']; ?>">
+                                                <input type="hidden" name="employer_id " id="employer_id" value="<?php echo $employer['user_id']; ?>">
                                                 <!-- Assuming 'id' is the primary key of the job -->
                                                 <button type="submit" name="deleteemployer" style="height: 25px; padding: 5px 10px; text-align: center; background-color: transparent; border: none; color: #333; font-size: 12px;">
                                                     <i class="fa fa-trash"></i>

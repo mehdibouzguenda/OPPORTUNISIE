@@ -7,10 +7,10 @@
             <div class="row align-items-center">
                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6">
                     <div class="logo">
-                        <a href="index.php"><img src="assets/img/logo/logo.png" alt="" /></a>
+                        <a href="index"><img src="assets/img/logo/logo.png" alt="" /></a>
                     </div>
                     <div class="logo-black">
-                        <a href="index.php"><img src="assets/img/logo/logo-black.png" alt="" /></a>
+                        <a href="index"><img src="assets/img/logo/logo-black.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-6 col-sm-6 col-6">
@@ -19,11 +19,17 @@
                             <nav id="mobile-menu">
                                 <ul>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/') {echo'active' ; } else {echo'';} ?>"><a href="/BidenBU">home <i class="far"></i></a></li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="job.php">Jobs <i class="far "></i></a> </li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/candidate.php') {echo'active' ; } ?>"><a href="candidate.php">Candidates <i class="far"></i></a></li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/employer.php') {echo'active' ; } ?>"><a href="employer.php">Employers <i class="far"></i></a></li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/about.php') {echo'active' ; } ?>"><a href="blog.php">Blog <i class="far"></i></a> </li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="about.php">About us</a></li>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="job">Jobs <i class="far "></i></a> </li>
+
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/candidate.php') {echo'active' ; } ?>"><a href="candidate">Candidates <i class="far"></i></a></li>
+
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/employer.php') {echo'active' ; } ?>"><a href="employer">Employers <i class="far"></i></a></li>
+
+
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/blog') {echo'active' ; } ?>"><a href="blog">Blog <i class="far"></i></a> </li>
+                                    <?php           if($_SESSION['user'] ?? false): ?>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/reclamation') {echo'active' ; } ?>"><a href="reclamation">Reclamation</a></li>
+                                    <?php endif ?>
                                 </ul>
                             </nav>
                         </div>
@@ -31,15 +37,15 @@
                             <div class="header-btn d-none d-lg-block">
                                 <form action="/BidenBU/logout" method="post">
                                 <div class="hedder-button">
-                                    <img src="assets/img/team/mehdi.JPG"  alt="Avatar" style="position: relative; width: 50px; height: 50px; overflow: hidden; object-fit: cover; object-position: 0px 20%; border-radius: 50%;">
+                                    <a href="user-details"><img src="assets/img/team/mehdi.JPG" href="user-detail" alt="Avatar" style="position: relative; width: 50px; height: 50px; overflow: hidden; object-fit: cover; object-position: 0px 20%; border-radius: 50%;"></a>
                                     <button class="h-btn d-lg-none d-xl-inline-block"  ><i class="far fa-user-circle"></i> LOG OUT</button>
                                 </div></form>
                             </div>
                         <?php else:?>
                             <div class="header-btn d-none d-lg-block">
                                 <div class="hedder-button">
-                                    <a class="h-btn d-lg-none d-xl-inline-block" href="register.php" ><i class="far fa-user-circle"></i> Sign up</a>
-                                    <a class="h-btn h-btn-green  " href="login.php" ><i class="far fa-lock-alt"></i> Log In</a>
+                                    <a class="h-btn d-lg-none d-xl-inline-block" href="register" ><i class="far fa-user-circle"></i> Sign up</a>
+                                    <a class="h-btn h-btn-green  " href="login" ><i class="far fa-lock-alt"></i> Log In</a>
                                 </div>
                             </div>
                         <?php endif; ?>

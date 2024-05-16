@@ -27,7 +27,7 @@ class CandidateModel
     public function addCandidate($fullName, $languages, $age, $location, $expectedSalaryRange, $salaryRange, $experienceYears)
     {
         try {
-            $query = "INSERT INTO candidates (full_name, languages, age, location, expected_salary_range, salary_range, experience_years) VALUES (:fullName, :languages, :age, :location, :expectedSalaryRange, :salaryRange, :experienceYears)";
+            $query = "";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':fullName', $fullName);
             $stmt->bindParam(':languages', $languages);

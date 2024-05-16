@@ -5,7 +5,8 @@
     <main>
 
         <!-- page title area start -->
-        <section class="page__title page__title-height d-flex align-items-center" data-background="assets/img/page-title/page-title-1.jpg">
+        <section class="page__title page__title-height d-flex align-items-center"
+                 data-background="assets/img/page-title/page-title-1.jpg">
             <div class="hero-shape">
                 <span class="circle"></span>
                 <span class="circle circle-yellow"></span>
@@ -40,7 +41,8 @@
                     <div class="col-xl-6 col-lg-6 offset-lg-3 offset-xl-3">
                         <div class="section-title text-center ml-50 mr-50 mb-20">
                             <h2>Sign Up</h2>
-                            <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</p>
+                            <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                                consequatur</p>
                         </div>
                     </div>
                 </div>
@@ -49,41 +51,61 @@
                         <div class="signin-popup-box">
                             <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="Candidate-tab" data-toggle="tab" href="#Candidate" role="tab" aria-controls="Candidate" aria-selected="true">Candidate</a>
+                                    <a class="nav-link active" id="Candidate-tab" data-toggle="tab" href="#Candidate"
+                                       role="tab" aria-controls="Candidate" aria-selected="true">Candidate</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="Employer-tab" data-toggle="tab" href="#Employer" role="tab" aria-controls="Employer" aria-selected="false">Employer</a>
+                                    <a class="nav-link" id="Employer-tab" data-toggle="tab" href="#Employer" role="tab"
+                                       aria-controls="Employer" aria-selected="false">Employer</a>
                                 </li>
                             </ul>
                             <div class="tab-content d-flex justify-content-center" id="myTabContent">
-                                <div class="tab-pane fade show active" id="Candidate" role="tabpanel" aria-labelledby="Candidate-tab">
+                                <div class="tab-pane fade show active" id="Candidate" role="tabpanel"
+                                     aria-labelledby="Candidate-tab">
                                     <div class="login-form">
-                                        <form action="/BidenBU/register" method="post">
-                                            <input id="Role" name="Role" type="hidden" value="Candidate" >
 
+                                        <form action="/BidenBU/register" method="post"
+                                              onsubmit="return registrationValidator() ">
+                                            <div class="alert alert-danger text-center" id="infoMessage"
+                                                 style="display: none;">
+                                            </div>
+                                            <?php
+                                            if (isset($errors['info'])) {
+                                                ?>
+                                                <div class="alert alert-danger text-center">
+                                                    <?php echo $errors['info']; ?>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <input id="Role" name="Role" type="hidden" value="Candidate">
 
                                             <div class="input-text">
                                                 <input id="username" name="username" type="text" placeholder="Username">
                                                 <i class="la la-user"></i>
                                             </div>
+                                            <div class="input-text">
+                                                <input id="fullname" name="fullname" type="text"
+                                                       placeholder="Enter  your Full name">
+                                                <i class="la la-user"></i>
+                                            </div>
                                             <div class="input-text input-pass">
-                                                <input id="password" name="password" type="password" placeholder="********">
+                                                <input id="password" name="password" type="password"
+                                                       placeholder="********">
                                             </div>
                                             <div class="input-text input-email">
                                                 <input id="email" name="email" type="email" placeholder="Email">
                                             </div>
                                             <div class="input-text input-phone">
-                                                <input  id="phone" name="phone" type="text" placeholder="Phone">
+                                                <input id="phone" name="phone" type="text" placeholder="Phone">
                                             </div>
                                             <p class="remember-label">
-                                                <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember Me</label>
+                                                <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember
+                                                    Me</label>
                                             </p>
                                             <a href="#" title="">Forgot Password?</a>
                                             <br>
-                                            <?php if(isset($errors['username'])) :?>
-                                                <p style="color:red;"><?= $errors['username'] ?></p>
-                                            <?php endif; ?>
-                                            <button type="submit">Login</button>
+                                            <button type="submit">register</button>
                                         </form>
                                         <div class="extra-login">
                                             <span>Or</span>
@@ -96,30 +118,46 @@
                                 </div>
                                 <div class="tab-pane fade" id="Employer" role="tabpanel" aria-labelledby="Employer-tab">
                                     <div class="login-form">
-                                        <form action="/BidenBU/register" method="post">
-                                            <input id="Role" name="Role" type="hidden" value="Employer" >
+                                        <form action="/BidenBU/register" method="post"  onsubmit="return registrationValidator1() ">
+                                            <div class="alert alert-danger text-center" id="infoMessage1"
+                                                 style="display: none;">
+                                            </div>
+                                            <?php
+                                            if (isset($errors['info'])) {
+                                                ?>
+                                                <div class="alert alert-danger text-center">
+                                                    <?php echo $errors['info']; ?>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <input id="Role" name="Role" type="hidden" value="Employer">
                                             <div class="input-text">
-                                                <input id="username" name="username" type="text" placeholder="Username">
+                                                <input id="username1" name="username" type="text" placeholder="Username">
+                                                <i class="la la-user"></i>
+                                            </div>
+                                            <div class="input-text">
+                                                <input id="fullname1" name="fullname" type="text"
+                                                       placeholder="Enter  your Full name">
                                                 <i class="la la-user"></i>
                                             </div>
                                             <div class="input-text input-pass">
-                                                <input id="password" name="password" type="password" placeholder="********">
+                                                <input id="password1" name="password" type="password"
+                                                       placeholder="********">
                                             </div>
                                             <div class="input-text input-email">
-                                                <input id="email" name="email" type="email" placeholder="Email">
+                                                <input id="email1" name="email" type="email" placeholder="Email">
                                             </div>
                                             <div class="input-text input-phone">
-                                                <input id="phone" name="phone" type="text" placeholder="Phone">
+                                                <input id="phone1" name="phone" type="text" placeholder="Phone">
                                             </div>
                                             <p class="remember-label">
-                                                <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember Me</label>
+                                                <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember
+                                                    Me</label>
                                             </p>
                                             <a href="#" title="">Forgot Password?</a>
                                             <br>
-                                            <?php if(isset($errors['username'])) :?>
-                                                <p style="color:red;"><?= $errors['username'] ?></p>
-                                            <?php endif; ?>
-                                            <button type="submit">Login</button>
+                                            <button type="submit">Register</button>
                                         </form>
                                         <div class="extra-login">
                                             <span>Or</span>

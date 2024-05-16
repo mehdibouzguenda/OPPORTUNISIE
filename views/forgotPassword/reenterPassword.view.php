@@ -5,8 +5,7 @@
     <main>
 
         <!-- page title area start -->
-        <section class="page__title page__title-height d-flex align-items-center"
-                 data-background="assets/img/page-title/page-title-1.jpg">
+        <section class="page__title page__title-height d-flex align-items-center" data-background="assets/img/page-title/page-title-1.jpg">
             <div class="hero-shape">
                 <span class="circle"></span>
                 <span class="circle circle-yellow"></span>
@@ -41,8 +40,7 @@
                     <div class="col-xl-6 col-lg-6 offset-lg-3 offset-xl-3">
                         <div class="section-title text-center ml-50 mr-50 mb-20">
                             <h2>Log In </h2>
-                            <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-                                consequatur</p>
+                            <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</p>
                         </div>
                     </div>
                 </div>
@@ -50,35 +48,29 @@
                     <div class="col-12">
                         <div class="signin-popup-box d-flex justify-content-center">
                             <div class="login-form">
-
-                                <form onsubmit="return login_Validitor()" action="/BidenBU/login" method="post">
+                                <form action="/BidenBU/newPassword" method="post" onsubmit="return newPasswordValidator() " >
                                     <div class="alert alert-danger text-center" id="infoMessage"
                                          style="display: none;">
                                     </div>
                                     <?php
                                     if (isset($errors['info'])) {
                                         ?>
-                                        <div class="alert alert-danger text-center">
+                                        <div class="alert alert-success text-center">
                                             <?php echo $errors['info']; ?>
                                         </div>
                                         <?php
                                     }
                                     ?>
-
                                     <div class="input-text">
-                                        <input id="email" name="email" type="text" placeholder="Email">
+                                        <input id="password" name="password"  type="password" placeholder="type your new password ">
                                         <i class="la la-user"></i>
                                     </div>
                                     <div class="input-text input-pass">
-                                        <input id="password" name="password" type="password" placeholder="********">
+                                        <input id="password2" name="password2" type="password" placeholder="type it again">
                                     </div>
-                                    <p class="remember-label">
-                                        <input type="checkbox" id="A" name="A" value="A"> <label for="A">Remember
-                                            Me</label>
-                                    </p>
-                                    <a href="forgotPassword" title="">Forgot Password?</a>
+                                    <a href="forgotPassword" title="">back</a>
                                     <br>
-                                    <button type="submit">Login</button>
+                                    <button type="submit">Send</button>
                                 </form>
                                 <div class="extra-login">
                                     <span>Or</span>

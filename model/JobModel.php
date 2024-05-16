@@ -24,13 +24,13 @@ class JobModel
         }
     }
 
-    public function addJob($jobType, $category, $location, $offeredSalaryMin, $offeredSalaryMax, $postDate, $expRequired, $gender, $industry, $label, $applicationsReceived, $appEndDate, $employerId, $description, $status)
+    public function addJob($jobType, $categoryId, $location, $offeredSalaryMin, $offeredSalaryMax, $postDate, $expRequired, $gender, $industry, $label, $applicationsReceived, $appEndDate, $employerId, $description, $status)
     {
         try {
-            $query = "INSERT INTO job (job_type, category, location, offered_salary_min, offered_salary_max, post_date, exp_required, gender, industry, label, applications_received, app_end_date, employer_id, description, status) VALUES (:jobType, :category, :location, :offeredSalaryMin, :offeredSalaryMax, :postDate, :expRequired, :gender, :industry, :label, :applicationsReceived, :appEndDate, :employerId, :description, :status)";
+            $query = "INSERT INTO job (job_type, category, location, offered_salary_min, offered_salary_max, post_date, exp_required, gender, industry, label, applications_received, app_end_date, user_id, description, status) VALUES (:jobType, :categoryId, :location, :offeredSalaryMin, :offeredSalaryMax, :postDate, :expRequired, :gender, :industry, :label, :applicationsReceived, :appEndDate, :employerId, :description, :status)";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':jobType', $jobType);
-            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':categoryId', $categoryId);
             $stmt->bindParam(':location', $location);
             $stmt->bindParam(':offeredSalaryMin', $offeredSalaryMin);
             $stmt->bindParam(':offeredSalaryMax', $offeredSalaryMax);
@@ -64,13 +64,13 @@ class JobModel
         }
     }
 
-    public function updateJob($jobId, $jobType, $category, $location, $offeredSalaryMin, $offeredSalaryMax, $postDate, $expRequired, $gender, $industry, $label, $applicationsReceived, $appEndDate, $employerId, $description, $status)
+    public function updateJob($jobId, $jobType, $categoryId, $location, $offeredSalaryMin, $offeredSalaryMax, $postDate, $expRequired, $gender, $industry, $label, $applicationsReceived, $appEndDate, $employerId, $description, $status)
     {
         try {
-            $query = "UPDATE job SET job_type = :jobType, category = :category, location = :location, offered_salary_min = :offeredSalaryMin, offered_salary_max = :offeredSalaryMax, post_date = :postDate, exp_required = :expRequired, gender = :gender, industry = :industry, label = :label, applications_received = :applicationsReceived, app_end_date = :appEndDate, employer_id = :employerId, description = :description, status = :status WHERE job_id = :jobId";
+            $query = "UPDATE job SET job_type = :jobType, category = :categoryId, location = :location, offered_salary_min = :offeredSalaryMin, offered_salary_max = :offeredSalaryMax, post_date = :postDate, exp_required = :expRequired, gender = :gender, industry = :industry, label = :label, applications_received = :applicationsReceived, app_end_date = :appEndDate, user_id = :employerId, description = :description, status = :status WHERE job_id = :jobId";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':jobType', $jobType);
-            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':categoryId', $categoryId);
             $stmt->bindParam(':location', $location);
             $stmt->bindParam(':offeredSalaryMin', $offeredSalaryMin);
             $stmt->bindParam(':offeredSalaryMax', $offeredSalaryMax);
@@ -88,8 +88,69 @@ class JobModel
             return $stmt->execute();
         } catch (PDOException $e) {
             // Log or handle the exception appropriately
-            echo "Error: " . $e->getMessage(); // Add this line to print the error message
             return false;
         }
     }
+
+
+    public function getJobCategories()
+    {
+        try {
+            $query = "SELECT * FROM job_categories";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $categories;
+
+        } catch (PDOException $e) {
+            // Log or handle the exception appropriately
+            return [];
+        }
+        //dd( $categories);
+    }
+
+    public function getJobCategoryById($categoryId)
+    {
+        try {
+            $query = "SELECT * FROM job_categories WHERE category_id  = :categoryId";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':categoryId', $categoryId);
+            $stmt->execute();
+            $category = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $category;
+        } catch (PDOException $e) {
+            // Log or handle the exception appropriately
+            return null;
+        }
+    }
+
+
+    public function addJobCategory($category, $subcategory)
+    {
+        try {
+            $query = "INSERT INTO job_categories (category_name, subcategory_name) VALUES (:category, :subcategory)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':subcategory', $subcategory);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            // Log or handle the exception appropriately
+            return false;
+        }
+    }
+
+    public function deleteJobCategory($categoryId) {
+        try {
+            $query = "DELETE FROM job_categories WHERE category_id  = :categoryId";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':categoryId', $categoryId);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            // Log or handle the exception appropriately
+            return false;
+        }
+    }
+
 }
+?>

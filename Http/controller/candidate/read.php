@@ -1,7 +1,5 @@
-
-
 <?php
-
+//dd('test');
 //$config= require('config.php');
 //$db=new Database($config['database']);
 //$currentUserId=1;
@@ -10,7 +8,7 @@ use core\App;
 
 $db=App::resolve( Database::class);
 
-$employers=$db->query('SELECT * FROM `employer`',[])->get();
-//dd($employers);
+$candidates=$db->query('SELECT * FROM `user` where  `role`= "Candidate" ',[])->get();
+//dd($candidates);
 
-require('views/employer.view.php');
+require('views/candidate.view.php');
