@@ -36,7 +36,7 @@ if($user){
     if(SendMail($email,$subject,$message)){
         $errors['info']= "We've sent a passwrod reset otp to your email - $email";
         $_SESSION['email'] = $email;
-        require('views/forgotPassword/reenterPassword.view.php');
+        require('views/forgotPassword/restPassword.view.php');
         exit();
     }else{
         $errors['info'] = "Failed while sending code!";

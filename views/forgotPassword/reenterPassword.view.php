@@ -48,7 +48,19 @@
                     <div class="col-12">
                         <div class="signin-popup-box d-flex justify-content-center">
                             <div class="login-form">
-                                <form action="/BidenBU/login" method="post" >
+                                <form action="/BidenBU/newPassword" method="post" onsubmit="return newPasswordValidator() " >
+                                    <div class="alert alert-success text-center" id="infoMessage"
+                                         style="display: none;">
+                                    </div>
+                                    <?php
+                                    if (isset($errors['info'])) {
+                                        ?>
+                                        <div class="alert alert-success text-center">
+                                            <?php echo $errors['info']; ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                     <div class="input-text">
                                         <input id="password" name="password"  type="password" placeholder="type your new password ">
                                         <i class="la la-user"></i>
@@ -58,9 +70,6 @@
                                     </div>
                                     <a href="forgotPassword" title="">back</a>
                                     <br>
-                                    <?php if(isset($errors['username'])) :?>
-                                        <p style="color:red;"><?= $errors['username'] ?></p>
-                                    <?php endif; ?>
                                     <button type="submit">Send</button>
                                 </form>
                                 <div class="extra-login">

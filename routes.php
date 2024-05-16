@@ -35,7 +35,7 @@ $router->get('/BidenBU/blog-details','blog/blog-details/index.php');
 
 $router->get('/BidenBU/login','Sessions/login.php');
 $router->get('/BidenBU/register','registration/register.php')->only('guest');
-$router->post('/BidenBU/login','Sessions/create.php');
+$router->post('/BidenBU/login','Sessions/create.php')->only('guest');;
 $router->post('/BidenBU/register','registration/create.php');
 $router->delete('/BidenBU/logout','Sessions/delete.php')->only('auth');
 $router->get('/BidenBU/forgotPassword','forgotPassword/forgotPassword.php');
@@ -48,5 +48,6 @@ $router->get('/BidenBU/user-details','user/index.php');
 $router->patch('/BidenBU/userUpdate','user/update.php');
 $router->delete('/BidenBU/userDelete','user/delete.php');
 
+$router->get('/BidenBU/user-details','user/index.php');
 
 

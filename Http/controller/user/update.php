@@ -31,12 +31,12 @@ if (!empty($errors)) {
 
 $db = App::resolve(Database::class);
 
-$user = $db->query('select * from users where username= :username', [
+$user = $db->query('select * from user where username= :username', [
     'username' => $username,
 ])->find();
 
 if (password_verify($password, $user['password'])) {
-    $db->query('UPDATE users SET email= :email , phone = :phone , role= :role WHERE username = :username and email = :email', [
+    $db->query('UPDATE user SET email= :email , phone = :phone , role= :role WHERE username = :username and email = :email', [
 
         'email' => $email,
         'phone' => $phone,

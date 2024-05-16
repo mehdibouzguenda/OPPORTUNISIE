@@ -40,9 +40,9 @@ $db=App::resolve( Database::class);
 
 //$config= require('config.php');
 //$db=new Database($config['database']);
-
-$user=$db->query('select * from user where username= :username',[
-    'username'=>$username,
+$email=$_POST["email"];
+$user=$db->query('select * from user where email= :email',[
+    'email'=>$email,
 ])->find();
 
 if(!$user){
@@ -52,12 +52,13 @@ if(!$user){
 }
 else if (password_verify($password,$user['password'])){
     //header('location : /BidenBU/ ');
-    $_SESSION['id']=$user['id'];
+    $_SESSION['id']=$user['user_id'];
     $_SESSION['role']=$user['role'];
     $_SESSION['username']=$username;
     $_SESSION['email']=$user['email'];
     $_SESSION['phone']=$user['phone'];
     $_SESSION['user']=$user;
+    //dd($_SESSION);
     require('views/index.view.php');
     exit();
 }else{

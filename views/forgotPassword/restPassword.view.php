@@ -48,7 +48,7 @@
                     <div class="col-12">
                         <div class="signin-popup-box d-flex justify-content-center">
                             <div class="login-form">
-                                <form action="/BidenBU/RestPasswordCode" method="post" onsubmit="return restCodeValidatior()" >
+                                <form action="/BidenBU/RestPasswordCode" method="post" onsubmit="return restCodeValidator()" >
                                     <div class="alert alert-success text-center" id="infoMessage"
                                          style="display: none;">
                                     </div>

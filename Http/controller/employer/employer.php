@@ -8,7 +8,7 @@ use core\App;
 
 $db=App::resolve( Database::class);
 
-$employers=$db->query('SELECT * FROM `employer`',[])->get();
+$employers=$db->query('SELECT * FROM `user` where `role`="Employer" ',[])->get();
 //dd($employers);
 
 require('views/employer.view.php');

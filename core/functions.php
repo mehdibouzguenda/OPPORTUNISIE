@@ -28,13 +28,16 @@ function view($path,$attributes=[]){
 }
 
 function login($user){
-    $_SESSION['id']=$user['id'];
-    $_SESSION['role']=$user['role'];
-    $_SESSION['username']=$user['username'];
-    $_SESSION['email']=$user['email'];
-    $_SESSION['phone']=$user['phone'];
-    $_SESSION['user']=$user;
     session_regenerate_id(true);
+    //dd($user);
+    $_SESSION['id'] = $user[0]['user_id'];
+    $_SESSION['role'] = $user[0]['role'];
+    $_SESSION['username'] = $user[0]['username'];
+    $_SESSION['email'] = $user[0]['email'];
+    $_SESSION['phone'] = $user[0]['phone'];
+    $_SESSION['fullname'] = $user[0]['full_name'];
+    $_SESSION['user'] = $user[0];
+
 }
 
 function logout(){

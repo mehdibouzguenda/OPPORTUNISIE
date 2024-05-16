@@ -20,10 +20,16 @@
                                 <ul>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/') {echo'active' ; } else {echo'';} ?>"><a href="/BidenBU">home <i class="far"></i></a></li>
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/job.php') {echo'active' ; } ?>"><a href="job">Jobs <i class="far "></i></a> </li>
+
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/candidate.php') {echo'active' ; } ?>"><a href="candidate">Candidates <i class="far"></i></a></li>
+
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/employer.php') {echo'active' ; } ?>"><a href="employer">Employers <i class="far"></i></a></li>
+
+
                                     <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/blog') {echo'active' ; } ?>"><a href="blog">Blog <i class="far"></i></a> </li>
-                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/about') {echo'active' ; } ?>"><a href="about">About us</a></li>
+                                    <?php           if($_SESSION['user'] ?? false): ?>
+                                    <li class=" <?php  if($_SERVER['REQUEST_URI']==='/BidenBU/reclamation') {echo'active' ; } ?>"><a href="about">Reclamation</a></li>
+                                    <?php endif ?>
                                 </ul>
                             </nav>
                         </div>
